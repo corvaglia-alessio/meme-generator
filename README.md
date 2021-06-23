@@ -22,9 +22,11 @@
 
 ## Database Tables
 
-- Table `users` - contains xx yy zz
-- Table `something` - contains ww qq ss
-- ...
+- Table `fonts` - contains id, font
+- Table `images` - contains id, path, up, center, down
+- Table `memes` - contains id, title, imageid, textup, textcenter, textdown, public, userid, copy, color, fontid
+- Table `users` - contains id, email, name, hash
+
 
 ## Main React Components
 
