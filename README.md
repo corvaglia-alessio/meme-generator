@@ -1,5 +1,5 @@
-# Exam #1234: "Exam Title"
-## Student: s123456 LASTNAME FIRSTNAME 
+# Exam #2: "Meme Generator"
+## Student: s281557 CORVAGLIA ALESSIO
 
 ## React Client Application Routes
 
@@ -40,5 +40,6 @@
 
 ## Users Credentials
 
-- username, password (plus any other requested info)
-- username, password (plus any other requested info)
+- USERNAME: test1@polito.it, PASSWORD: test1 (plus any other requested info)
+- USERNAME: test2@polito.it, PASSWORD: test2 (plus any other requested info)
+- USERNAME: test3@polito.it, PASSWORD: test3 (plus any other requested info)
