@@ -1,40 +1,29 @@
+import {Modal, Button, FormControl, InputGroup, Alert} from 'react-bootstrap/';
 
 function LoginModal(props) {
   return (
-    <Modal {...props}size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Login
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <InputGroup className="mb-3"> 
+          <FormControl placeholder="Email" aria-label="Email" aria-describedby="basic-addon1"/>
+        </InputGroup>
+        <InputGroup className="mb-3">
+          <FormControl placeholder="Password" aria-label="Password" type="password" aria-describedby="basic-addon1"/>
+        </InputGroup>
+        <Alert variant="danger">
+          Wrong username and/or password!
+        </Alert>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button variant="success">Login</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-function App() {
-  const [modalShow, setModalShow] = React.useState(false);
-
-  return (
-    <>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
-        Launch vertically centered modal
-      </Button>
-
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-    </>
-  );
-}
+export {LoginModal};
