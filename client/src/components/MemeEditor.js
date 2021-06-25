@@ -1,4 +1,5 @@
 import {FormControl, InputGroup, Form, Container, Alert, Button} from 'react-bootstrap/';
+import {CheckCircle} from 'react-bootstrap-icons';
 
 function MemeEditor(props) {
   return (
@@ -17,7 +18,7 @@ function MemeEditor(props) {
         </InputGroup>
         <InputGroup className="mb-5">
             <FormControl placeholder="Color" aria-label="Color" type="color"/>
-            <FormControl className="w-75" placeholder="Font" aria-label="Font" as="select">
+            <FormControl className="w-75" placeholder="Font" variant="success" aria-label="Font" as="select">
                 <option>aa</option>
                 <option>bb</option>
             </FormControl>
@@ -26,7 +27,10 @@ function MemeEditor(props) {
             <Form.Check aria-label="Public"/> Let this meme to be public
         </InputGroup>
         <InputGroup className="mb-5">
-            <Button variant="success">Save</Button>
+            <Button variant="success">
+                <CheckCircle color="white" className="mr-2" size= "30"/>
+                Save
+            </Button>
         </InputGroup>
         <Alert variant="danger">
           You must specify at least a title and one of the texts!

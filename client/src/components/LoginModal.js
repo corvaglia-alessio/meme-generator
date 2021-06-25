@@ -1,4 +1,5 @@
 import {Modal, Button, FormControl, InputGroup, Alert} from 'react-bootstrap/';
+import {CheckCircle} from 'react-bootstrap-icons';
 
 function LoginModal(props) {
   return (
@@ -20,7 +21,10 @@ function LoginModal(props) {
         </Alert>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success">Login</Button>
+        <Button variant="success">
+          <CheckCircle color="white" className="mr-2" size= "30"/>
+          Login
+          </Button>
       </Modal.Footer>
     </Modal>
   );

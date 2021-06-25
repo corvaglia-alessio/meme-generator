@@ -24,13 +24,28 @@
   color: white;
 }
 
+.MemeCard{
+    max-width: 175px;
+    float: right;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.Thumbnail{
+  max-height: 300px;
 }
 
 .Editor{
   position: relative;
   top: 15%;
+}
+
+.Details{
+  position: relative;
+  top: 45%;
+  text-align: center;
 }
 
 .UpText{
