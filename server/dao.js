@@ -53,3 +53,68 @@ exports.listPublicMemes = () => {
         });
     });
 };
+
+exports.getAllImagesPath = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT path FROM images';
+        db.all(sql, [], (e, rows) =>{
+            if(e){
+                reject(e);
+                return;
+            }
+            if(rows === undefined){
+                resolve({error: "no images found"});
+            }
+            else{
+                const images  = rows.map((i) => ({
+                    path: i.path,
+                }));
+                resolve(images);
+            }
+        });
+    });
+};
+
+
+exports.getImageInfo = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM images WHERE id = ?';
+        db.get(sql, [id], (e, row) =>{
+            if(e){
+                reject(e);
+                return;
+            }
+            if(rows === undefined)
+                resolve({error: "image not found"});
+            else{
+                const img = {
+                    id: row.id,
+                    up: row.up,
+                    center: row.center,
+                    down: row.down
+                }
+                console.log("aa");
+                resolve(img);
+            }
+        });
+    });
+}
+
+exports.getImagePath = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT path FROM images WHERE id = ?';
+        console.log(sql);
+        db.get(sql, [id], (e, row) =>{
+            if(e){
+                reject(e);
+                return;
+            }
+            if(rows === undefined)
+                resolve({error: "image not found"});
+            else{
+                const img = {path: row.path};
+                resolve(img);
+            }
+        });
+    });
+}

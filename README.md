@@ -9,16 +9,31 @@
 
 ## API Server
 
-- POST `/api/login`
+- POST `/api/sessions`
   - request parameters and request body content
   - response body content
-- GET `/api/something`
+- DELETE `/api/sessions/current`
   - request parameters
   - response body content
-- POST `/api/something`
+- GET `/api/sessions/current`
   - request parameters and request body content
   - response body content
-- ...
+- GET `/api/memes/all`
+  - request parameters and request body content
+  - response body content
+- GET `/api/memes/public`
+  - request parameters and request body content
+  - response body content
+- GET `/api/images`
+  - request parameters and request body content
+  - response body content
+- GET `/api/images/:id`
+  - request parameters and request body content
+  - response body content
+- GET `/api/images/info/:id`
+  - request parameters and request body content
+  - response body content
+
 
 ## Database Tables
 

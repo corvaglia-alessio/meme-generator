@@ -56,12 +56,46 @@ const loggedIn = (req, res, next) => {
   return res.status(401).json({error: "Not authenticated!"});
 };
 
-//QUERIES SECTION
+//APIs for users 
+
+//login
+app.post("/api/sessions", function (req, res, next){
+  passport.authenticate("local", (err, user, info) =>{
+    if(err)
+      return next(err);
+    if(!user)
+      return res.status(401).json(info);
+    req.login(user, (e) => {
+      if(e)
+        return next(err);
+      return res.json(req.user);
+    });
+  })(req, res, next);
+});
+
+//logout
+app.delete("/api/sessions/current", (req, res) =>{
+  req.logout();
+  res.end();
+});
+
+//check session
+app.get("/api/sessions/current", (req, res) => {
+  if(req.isAuthenticated())
+    res.status(200).json(req.user);
+  else
+    res.status(401).json({error: 'user non authenticated!'});
+});
+
+
+//APIs for contents
 
 //LIST ALL MEMES (login protected)
 app.get("/api/memes/all", loggedIn, async (req, res) => {
   try{
     const m = await dao.listAllMemes();
+    if(image.error)
+      res.status(404).json(result);
     res.json(m);
   }
   catch (e){
@@ -73,6 +107,8 @@ app.get("/api/memes/all", loggedIn, async (req, res) => {
 app.get("/api/memes/public", async (req, res) => {
   try{
     const m = await dao.listPublicMemes();
+    if(image.error)
+      res.status(404).json(result);
     res.json(m);
   }
   catch (e){
@@ -80,6 +116,49 @@ app.get("/api/memes/public", async (req, res) => {
   }
 });
 
+//SEND AN IMAGE RESOURCE
+app.get("/api/images/:id", async (req, res) =>{
+  try{
+    const image = await dao.getImagePath(req.params.id);
+    if(image.error)
+      res.status(404).json(result);
+    else{
+      res.sendFile(`./${image.path}`, {root: __dirname});
+    }
+  }
+  catch(e){
+    res.status(500).end();
+  }
+});
+
+//SEND ALL IMAGE RESOURCES
+app.get("/api/images", async (req, res) =>{
+  try{
+    const image = await dao.getAllImagesPath(req.params.id);
+    if(image.error)
+      res.status(404).json(result);
+    else{
+      //send the images!
+    }
+  }
+  catch(e){
+    res.status(500).end();
+  }
+});
+
+//LIST THE INFOS OF AN IMAGE
+app.get('/api/images/info/:id', async (req, res) => {
+  try{
+    const imageinfo = await dao.getImageInfo(req.params.id);
+    if(imageinfo.error)
+      res.status(404).json(result);
+    else
+      res.json(imageinfo);
+  }
+  catch(e){
+    res.status(500).end();
+  }
+});
 
 // activate the server
 app.listen(port, () => {

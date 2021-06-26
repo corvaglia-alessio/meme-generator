@@ -6,4 +6,4 @@ const database = new sqlite.Database('memes.db', (e) =>{
     if (e) throw e;
 })
 
-module.exports = {db};
+module.exports = {database};
