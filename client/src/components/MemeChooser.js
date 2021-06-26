@@ -1,4 +1,4 @@
-import {Container, Image, Row, Col, Card, Button} from 'react-bootstrap/'
+import {Container, Row, Col} from 'react-bootstrap/'
 import {MemeCard} from './MemeCard.js'
 
 function MemeChooser(props){
