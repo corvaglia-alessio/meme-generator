@@ -1,11 +1,11 @@
 'use strict';
 
-const {db} = require("./database.js");
+const {database} = require("./database.js");
 
 exports.listAllMemes = () => {
     return new Promise((resolve, reject) => {
         const sql = "SELECT m.id, m.title, m.textup, m.textcenter, m.textdown, m.imgid, m.public, m.copy,  m.color, u.name, f.font, FROM memes m, users u, fonts f WHERE m.userid = u.id AND m.fontid = f.id";
-        db.all(sql, [], (e, rows) => {
+        database.all(sql, [], (e, rows) => {
             if(e){
                 reject(e);
                 return;
@@ -31,7 +31,7 @@ exports.listAllMemes = () => {
 exports.listPublicMemes = () => {
     return new Promise((resolve, reject) => {
         const sql = "SELECT m.id, m.title, m.textup, m.textcenter, m.textdown, m.imgid, m.public, m.copy,  m.color, u.name, f.font, FROM memes m, users u, fonts f WHERE m.userid = u.id AND m.fontid = f.id AND m.public = 1";
-        db.all(sql, [], (e, rows) => {
+        database.all(sql, [], (e, rows) => {
             if(e){
                 reject(e);
                 return;
@@ -57,7 +57,7 @@ exports.listPublicMemes = () => {
 exports.getAllImagesPath = () => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT path FROM images';
-        db.all(sql, [], (e, rows) =>{
+        database.all(sql, [], (e, rows) =>{
             if(e){
                 reject(e);
                 return;
@@ -79,13 +79,14 @@ exports.getAllImagesPath = () => {
 exports.getImageInfo = (id) => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM images WHERE id = ?';
-        db.get(sql, [id], (e, row) =>{
+        database.get(sql, [id], (e, row) =>{
             if(e){
                 reject(e);
                 return;
             }
-            if(rows === undefined)
+            if(row === undefined){
                 resolve({error: "image not found"});
+            }
             else{
                 const img = {
                     id: row.id,
@@ -93,7 +94,6 @@ exports.getImageInfo = (id) => {
                     center: row.center,
                     down: row.down
                 }
-                console.log("aa");
                 resolve(img);
             }
         });
@@ -103,13 +103,12 @@ exports.getImageInfo = (id) => {
 exports.getImagePath = (id) => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT path FROM images WHERE id = ?';
-        console.log(sql);
-        db.get(sql, [id], (e, row) =>{
+        database.get(sql, [id], (e, row) =>{
             if(e){
                 reject(e);
                 return;
             }
-            if(rows === undefined)
+            if(row === undefined)
                 resolve({error: "image not found"});
             else{
                 const img = {path: row.path};

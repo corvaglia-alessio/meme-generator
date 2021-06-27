@@ -4,8 +4,8 @@ const express = require('express');
 const morgan = require('morgan');
 const userDao = require('./userdao');
 const dao = require('./dao');
-const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session");
 
 //PASSPORT SECTION FOR LOGIN AND LOGOUT
@@ -13,27 +13,24 @@ passport.use(
   new LocalStrategy(function (username, password, done){
     userDao.getUser(username, password).then((user) => {
       if(!user)
-        return done(null, false, {
-          msg: "Incorrect username and or password"
-        });
-        return done(null, user);
+        return done(null, false, {msg: "Incorrect username and/or password"});
+      return done(null, user);
     })
   })
 );
 
-passport.serializeUser = (user, done) => {
+passport.serializeUser((user, done) => {
   done(null, user.id);
-};
+});
 
-passport.deserializeUser((id, done) =>{
-  userDao.getUserById(id).then((user) => {
-    done(null, user);
-  })
-  .catch((e) => {
-    done(err, null);
-  })
-})
-
+passport.deserializeUser((id, done) => {
+  userDao.getUserById(id)
+    .then(user => {
+      done(null, user);
+    }).catch(err => {
+      done(err, null);
+    });
+});
 
 // init express
 const app = new express();
@@ -50,6 +47,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//middleware for protected queries
 const loggedIn = (req, res, next) => {
   if(req.isAuthenticated())
     return next();
@@ -60,14 +58,15 @@ const loggedIn = (req, res, next) => {
 
 //login
 app.post("/api/sessions", function (req, res, next){
-  passport.authenticate("local", (err, user, info) =>{
+  passport.authenticate("local", (err, user, info) => {
     if(err)
       return next(err);
-    if(!user)
+    if(!user){
       return res.status(401).json(info);
+    }
     req.login(user, (e) => {
       if(e)
-        return next(err);
+        return next(e);
       return res.json(req.user);
     });
   })(req, res, next);
