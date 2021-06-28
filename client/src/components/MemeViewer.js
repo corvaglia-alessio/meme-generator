@@ -7,35 +7,35 @@ function MemeViewer(props){
         <Container style={style} className="Meme">
             <Row className="text-center mytext-up">
                 <Col>
-                    Pino
+                    Prova
                 </Col>
                 <Col>
-                    Pino
+                    
                 </Col>
                 <Col>
-                    Pino
+                    Prova
                 </Col>
             </Row>
             <Row className="text-center mytext-center ">
                 <Col>
-                    Pino
+                    
                 </Col>
                 <Col>
-                    Pino
+                    Prova
                 </Col>
                 <Col>
-                    Pino
+                    
                 </Col>
             </Row>
             <Row className="text-center mytext-down">
                 <Col>
-                    Pino
+                    Prova
                 </Col>
                 <Col>
-                    Pino
+                    Prova
                 </Col>
                 <Col>
-                    Pino
+                    Prova
                 </Col>
             </Row>
         </Container>
