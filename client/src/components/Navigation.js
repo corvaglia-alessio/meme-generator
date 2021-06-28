@@ -1,5 +1,5 @@
 import {Navbar, Nav, Button} from 'react-bootstrap/';
-import {DoorOpen, DoorClosed, AspectRatio, PlusCircle} from 'react-bootstrap-icons';
+import {DoorOpen, DoorClosed, AspectRatio, PlusCircle, House} from 'react-bootstrap-icons';
 import API from '../API';
 
 function Navigation(props){
@@ -12,13 +12,17 @@ function Navigation(props){
     return(
         <Navbar bg="primary" variant="dark" sticky="top">
             <AspectRatio color="white" className="mr-2" size= "30"/>
-            <Navbar.Brand href="">MemeGenerator</Navbar.Brand>
+            <Navbar.Brand>MemeGenerator</Navbar.Brand>
             <Nav className="ml-auto">
                { props.loggedIn ? 
                     <>
                     <Navbar.Brand>
                         {'Welcome ' + props.userInfo.name +"!"}
                     </Navbar.Brand>
+                    <Button className="mr-2" variant="success">
+                        <House className="mr-2" size="30"/>
+                        Home
+                    </Button>
                     <Button className="mr-2" variant="success">
                         <PlusCircle className="mr-2" size="30"/>
                         Create new meme
@@ -28,11 +32,18 @@ function Navigation(props){
                             Logout
                     </Button>
                     </>
-                 : 
-                <Button variant="success" onClick={() => props.setShowLoginModal(true)}>
-                    <DoorOpen className="mr-2" size="30"/>
-                    Login
-                </Button>
+                 :
+                 <>
+                    <Button className="mr-2" variant="success">
+                        <House className="mr-2" size="30"/>
+                        Home
+                    </Button>
+                    <Button variant="success" onClick={() => props.setShowLoginModal(true)}>
+                        <DoorOpen className="mr-2" size="30"/>
+                        Login
+                    </Button>
+                 </> 
+
                 }
             </Nav>
         </Navbar>

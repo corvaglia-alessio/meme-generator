@@ -28,8 +28,9 @@ function LoginModal(props) {
         const user = await API.login(credentials);
         props.setLoggedIn(true);
         props.setUserInfo(user);
-        props.setWrongInput(false);
         props.setShowLoginModal(false);
+        setWrongInput(false);
+        setError("");
       }
       catch (e) {
         setError("Invalid email and/or password!");

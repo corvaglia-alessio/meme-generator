@@ -16,38 +16,13 @@ function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({});
-  
-  useEffect(() => {
-    if (loggedIn) {
-      const checkAuth = async () => {
-        try {
-          const u = await API.getUserInfo();
-          setUserInfo(u);
-          setLoggedIn(true);
-          //dirty
-        } catch (err) {
-          //handleErrors(err.error);
-          console.error(err.error);
-        }
-      };
-      checkAuth();
-    }
-  }, [loggedIn]);
+  const [memes, setMemes] = useState({});
 
   return (
     <>
       <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn} userInfo={userInfo} setShowLoginModal={setShowLoginModal}/>
       <LoginModal show={showLoginModal} setLoggedIn={setLoggedIn} setUserInfo={setUserInfo} setShowLoginModal={setShowLoginModal} onHide={() => setShowLoginModal(false)}/>
       <Container fluid>
-        <MemeChooser/>
-      </Container>
-    </>
-  );
-}
-
-export default App;
-
-/*
         <Row>
           <Col>
             <MemeViewer/>
@@ -56,4 +31,13 @@ export default App;
             <MemeDetails/>
           </Col>
         </Row>
+      </Container>
+    </>
+  );
+}
+
+export default App;
+
+/*
+        <MemeChooser/>
 */
