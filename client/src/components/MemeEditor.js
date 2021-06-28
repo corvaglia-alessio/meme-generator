@@ -3,18 +3,18 @@ import {CheckCircle} from 'react-bootstrap-icons';
 
 function MemeEditor(props) {
   return (
-      <Container className="Editor">
+      <Container className="mt-5">
         <InputGroup className="mb-5"> 
             <FormControl placeholder="Meme title" aria-label="Meme title"/>
         </InputGroup>
         <InputGroup className="mb-3">
-            <FormControl placeholder="Text Up" aria-label="Text Up"/>
+            <FormControl placeholder="Text 1" aria-label="Text Up"/>
         </InputGroup>
         <InputGroup className="mb-3">
-            <FormControl placeholder="Text Center" aria-label="Text Center" disabled/>
+            <FormControl placeholder="Text 2" aria-label="Text Center" disabled/>
         </InputGroup>
         <InputGroup className="mb-5">
-            <FormControl placeholder="Text Down" aria-label="Text Down"/>
+            <FormControl placeholder="Text 3" aria-label="Text Down"/>
         </InputGroup>
         <InputGroup className="mb-5">
             <FormControl placeholder="Color" aria-label="Color" type="color"/>
@@ -24,7 +24,7 @@ function MemeEditor(props) {
             </FormControl>
         </InputGroup>
         <InputGroup className="mb-5">
-            <Form.Check aria-label="Public"/> Let this meme to be public
+            <Form.Check aria-label="Public"/> Public meme
         </InputGroup>
         <InputGroup className="mb-5">
             <Button variant="success">

@@ -13,6 +13,25 @@
   }
 }
 
+.mytext-up{
+  margin-top: 5%;
+}
+
+.mytext-center{
+  margin-top: 25%;
+}
+
+.mytext-down{
+  margin-top: 28%;
+}
+.Meme {
+    margin-top: 5%;
+    min-width: 1054px;
+    min-height: 620px;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -37,33 +56,10 @@
   max-height: 300px;
 }
 
-.Editor{
-  position: relative;
-  top: 15%;
-}
-
 .Details{
   position: relative;
   top: 45%;
   text-align: center;
-}
-
-.UpText{
-  position: relative;
-  text-align: center;
-  top: 20%
-}
-
-.CenterText{
-  position: relative;
-  text-align: center;
-  top: 50%
-}
-
-.DownText{
-  position: relative;
-  text-align: center;
-  top: 80%
 }
 
 @keyframes App-logo-spin {

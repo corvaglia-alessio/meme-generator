@@ -23,14 +23,7 @@ function App() {
       <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn} userInfo={userInfo} setShowLoginModal={setShowLoginModal}/>
       <LoginModal show={showLoginModal} setLoggedIn={setLoggedIn} setUserInfo={setUserInfo} setShowLoginModal={setShowLoginModal} onHide={() => setShowLoginModal(false)}/>
       <Container fluid>
-        <Row>
-          <Col>
-            <MemeViewer/>
-          </Col>
-          <Col className="mt-3">
-            <MemeDetails/>
-          </Col>
-        </Row>
+        <MemeChooser/>
       </Container>
     </>
   );
@@ -39,5 +32,11 @@ function App() {
 export default App;
 
 /*
-        <MemeChooser/>
+                <Row>
+          <Col>
+            <MemeViewer/>
+          </Col>
+          <Col className="mt-3">
+            <MemeDetails/>
+          </Col>
 */
