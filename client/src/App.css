@@ -24,8 +24,9 @@
 .mytext-down{
   margin-top: 28%;
 }
+
 .Meme {
-    margin-top: 5%;
+    margin-top: 12%;
     min-width: 1054px;
     min-height: 620px;
     background-repeat: no-repeat;
@@ -43,22 +44,19 @@
   color: white;
 }
 
-.MemeCard{
-    max-width: 175px;
-    float: right;
-}
-
 .App-link {
   color: #61dafb;
 }
 
-.Thumbnail{
-  max-height: 300px;
-}
-
 .Details{
   position: relative;
-  top: 45%;
+  top: 50%;
+  text-align: center;
+}
+
+.Editor{
+  position: relative;
+  top: 12%;
   text-align: center;
 }
 

@@ -3,7 +3,7 @@ import {CheckCircle} from 'react-bootstrap-icons';
 
 function MemeEditor(props) {
   return (
-      <Container className="mt-5">
+      <Container className="mt-5 Editor">
         <InputGroup className="mb-5"> 
             <FormControl placeholder="Meme title" aria-label="Meme title"/>
         </InputGroup>

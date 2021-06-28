@@ -34,9 +34,8 @@ function Navigation(props){
                     </>
                  :
                  <>
-                    <Button className="mr-2" variant="success">
-                        <House className="mr-2" size="30"/>
-                        Home
+                    <Button className="mr-2" variant="warning">
+                        <House size="30"/>
                     </Button>
                     <Button variant="success" onClick={() => props.setShowLoginModal(true)}>
                         <DoorOpen className="mr-2" size="30"/>

@@ -2,9 +2,9 @@ import {Navigation} from './components/Navigation.js'
 import {LoginModal} from './components/LoginModal.js'
 import {MemeEditor} from './components/MemeEditor.js'
 import {MemeViewer} from './components/MemeViewer.js'
-import {MemeDetails} from './components/MemeDetails.js'
 import { ImageChooser } from './components/ImageChooser.js'
 import { MemeChooser } from './components/MemeChooser.js'
+import {MemeDetails} from './components/MemeDetails'
 import {useState, useEffect} from 'react'
 import {Row, Col, Container} from 'react-bootstrap/'
 import './App.css';
@@ -23,7 +23,14 @@ function App() {
       <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn} userInfo={userInfo} setShowLoginModal={setShowLoginModal}/>
       <LoginModal show={showLoginModal} setLoggedIn={setLoggedIn} setUserInfo={setUserInfo} setShowLoginModal={setShowLoginModal} onHide={() => setShowLoginModal(false)}/>
       <Container fluid>
-         <MemeChooser/>
+        <Row>
+          <Col>
+            <MemeViewer/>
+          </Col>
+          <Col>
+            <MemeEditor/>
+          </Col>
+        </Row>
       </Container>
     </>
   );
