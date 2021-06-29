@@ -38,14 +38,6 @@ const port = 3001;
 
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(session({
-  secret: "281557Exam2MemeGenerator",
-  resave: false,
-  saveUninitialized: false
-})
-);
-app.use(passport.initialize());
-app.use(passport.session());
 
 //middleware for protected queries
 const loggedIn = (req, res, next) => {
@@ -53,6 +45,17 @@ const loggedIn = (req, res, next) => {
     return next();
   return res.status(401).json({error: "Not authenticated!"});
 };
+
+app.use(session({
+  secret: "281557Exam2MemeGenerator",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 //APIs for users 
 
@@ -161,6 +164,7 @@ app.get('/api/images/info/:id', async (req, res) => {
 app.get("/api/images/info", async (req, res) => {
   try{
     const i = await dao.getImagesInfo();
+    console.log(i);
     res.json(i);
   }
   catch (e){

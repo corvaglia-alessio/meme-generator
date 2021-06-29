@@ -21,19 +21,17 @@ function App() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    if (loggedIn) {
-      const checkAuth = async () => {
-        try {
-          const user = await API.getUserInfo();
-          setUserInfo(user);
-          setLoggedIn(true);
-        } catch (err) {
-          console.error(err.error);
-        }
-      };
-      checkAuth();
-    }
-  }, [loggedIn]);
+    const checkAuth = async () => {
+      try {
+        const user = await API.getUserInfo();
+        setUserInfo(user);
+        setLoggedIn(true);
+      } catch (err) {
+        console.log(err.error);
+      }
+    };
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     const getMemes = async () => {

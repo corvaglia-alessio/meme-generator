@@ -118,14 +118,11 @@ exports.getImageInfo = (id) => {
 
 exports.getImagesInfo = () => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM images';
+        const sql = "SELECT * FROM images";
         database.all(sql, [], (e, rows) =>{
             if(e){
                 reject(e);
                 return;
-            }
-            if(rows === undefined){
-                resolve({error: "images not found"});
             }
             else{
                 const images = rows.map((i) => ({
@@ -139,7 +136,7 @@ exports.getImagesInfo = () => {
                 centerright: i.centerright,
                 downleft: i.downleft,
                 downcenter: i.downcenter,
-                downright: i.downright
+                downright: i.downright,
             }));
             resolve(images);
             }
