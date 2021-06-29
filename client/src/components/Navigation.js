@@ -25,10 +25,12 @@ function Navigation(props){
                             <House size="30"/>
                         </Button>
                     </Link>
-                    <Button className="mr-2" variant="success">
-                        <PlusCircle className="mr-2" size="30"/>
-                        Create new meme
-                    </Button>
+                    <Link to="/imgchooser">
+                        <Button className="mr-2" variant="success">
+                            <PlusCircle className="mr-2" size="30"/>
+                            Create new meme
+                        </Button>
+                    </Link>
                     <Button variant="danger" onClick={logout}>
                         <DoorClosed className="mr-2" size="30"/>
                             Logout

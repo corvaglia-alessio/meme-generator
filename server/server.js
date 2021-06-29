@@ -142,6 +142,7 @@ app.get("/api/images", async (req, res) =>{
 });
 
 //LIST THE INFOS OF AN IMAGE
+/*
 app.get('/api/images/info/:id', async (req, res) => {
   try{
     const imageinfo = await dao.getImageInfo(req.params.id);
@@ -151,6 +152,18 @@ app.get('/api/images/info/:id', async (req, res) => {
       res.json(imageinfo);
   }
   catch(e){
+    res.status(500).end();
+  }
+});
+*/
+
+//LIST THE INFOS OF ALL IMAGES
+app.get("/api/images/info", async (req, res) => {
+  try{
+    const i = await dao.getImagesInfo();
+    res.json(i);
+  }
+  catch (e){
     res.status(500).end();
   }
 });

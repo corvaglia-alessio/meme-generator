@@ -1,4 +1,5 @@
 import Meme from "./components/models/meme";
+import Image from "./components/models/image";
 
 
 async function login(credentials){
@@ -57,5 +58,15 @@ async function getPublicMemes() {
   }
 }
 
-const API = {login, logout, getUserInfo, getAllMemes, getPublicMemes};
+async function getImages() {
+  const response = await fetch("/api/images/info");
+  const imagesJson = await response.json();
+  if (response.ok) {
+    return imagesJson.map((i) => Image.from(i));
+  } else {
+    throw imagesJson;
+  }
+}
+
+const API = {login, logout, getUserInfo, getAllMemes, getPublicMemes, getImages};
 export default API;

@@ -116,6 +116,37 @@ exports.getImageInfo = (id) => {
     });
 }
 
+exports.getImagesInfo = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM images';
+        database.all(sql, [], (e, rows) =>{
+            if(e){
+                reject(e);
+                return;
+            }
+            if(rows === undefined){
+                resolve({error: "images not found"});
+            }
+            else{
+                const images = rows.map((i) => ({
+                id: i.id,
+                path: i.path,
+                upleft: i.upleft,
+                upcenter: i.upcenter,
+                upright: i.upright,
+                centerleft: i.centerleft,
+                centercenter: i.centercenter,
+                centerright: i.centerright,
+                downleft: i.downleft,
+                downcenter: i.downcenter,
+                downright: i.downright
+            }));
+            resolve(images);
+            }
+        });
+    });
+}
+
 exports.getImagePath = (id) => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT path FROM images WHERE id = ?';

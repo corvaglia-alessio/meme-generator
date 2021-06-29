@@ -1,5 +1,6 @@
 import {Container, Image, Row, Col} from 'react-bootstrap/'
-import img from './2.jpg'
+// import img from './2.jpg'
+
 function ImageChooser(props){
     return(
         <Container fluid >
@@ -8,28 +9,7 @@ function ImageChooser(props){
                     <h1>Choose the image for your meme</h1>
                 </Col>
             </Row>
-            <Row className="m-3">
-                <Col className="text-center m-2">
-                    <Image src={img} className="Thumbnail" rounded />
-                </Col>
-                <Col className="text-center m-2">
-                    <Image src={img} className="Thumbnail" rounded />
-                </Col>
-                <Col className="text-center m-2">
-                    <Image src={img} className="Thumbnail" rounded />
-                </Col>
-            </Row>
-            <Row className="m-3">
-                <Col className="text-center m-2">
-                    <Image src={img} className="Thumbnail" rounded />
-                </Col>
-                <Col className="text-center m-2">
-                    <Image src={img} className="Thumbnail" rounded />
-                </Col>
-                <Col className="text-center m-2">
-                    <Image src={img} className="Thumbnail" rounded />
-                </Col>
-            </Row>
+            {props.imgs.map((i) => (<Image key={i.id} src={i.path} rounded/>))}
         </Container>
     )
 }

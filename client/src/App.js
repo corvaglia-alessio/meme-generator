@@ -18,16 +18,43 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [memes, setMemes] = useState([]);
+  const [images, setImages] = useState([]);
 
-  useEffect(() => async () => {
-      if (loggedIn) {
-        const m = await API.getAllMemes();
-        setMemes(m);
-      } else {
-        const m = await API.getPublicMemes();
-        setMemes(m);
+  useEffect(() => {
+    if (loggedIn) {
+      const checkAuth = async () => {
+        try {
+          const user = await API.getUserInfo();
+          setUserInfo(user);
+          setLoggedIn(true);
+        } catch (err) {
+          console.error(err.error);
+        }
+      };
+      checkAuth();
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    const getMemes = async () => {
+      if(loggedIn){
+        return await API.getAllMemes();
       }
-    }, [loggedIn, memes.length]);
+      else{
+        return await API.getPublicMemes();
+      }
+    } 
+
+    getMemes().then((me) => {setMemes(me)});
+  }, [loggedIn]);
+
+
+  useEffect(() => {
+    const getImg = async () => {
+      return await API.getImages();
+    }
+    getImg().then((im) => {setImages(im)});
+  }, []);
 
   return (
     <Router>
@@ -44,6 +71,9 @@ function App() {
                 <MemeDetails/>
               </Col>
             </Row>
+          </Route>
+          <Route path="/imgchooser">
+            <ImageChooser imgs={images}/>
           </Route>
           <Route path="/editor">
             <Row>
