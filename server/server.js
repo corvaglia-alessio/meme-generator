@@ -93,8 +93,6 @@ app.get("/api/sessions/current", (req, res) => {
 app.get("/api/memes/all", loggedIn, async (req, res) => {
   try{
     const m = await dao.listAllMemes();
-    if(image.error)
-      res.status(404).json(result);
     res.json(m);
   }
   catch (e){
@@ -106,8 +104,6 @@ app.get("/api/memes/all", loggedIn, async (req, res) => {
 app.get("/api/memes/public", async (req, res) => {
   try{
     const m = await dao.listPublicMemes();
-    if(image.error)
-      res.status(404).json(result);
     res.json(m);
   }
   catch (e){

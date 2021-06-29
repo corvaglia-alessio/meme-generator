@@ -1,3 +1,6 @@
+import Meme from "./components/models/meme";
+
+
 async function login(credentials){
     let res = await fetch("/api/sessions", {
         method: "POST",
@@ -6,7 +9,6 @@ async function login(credentials){
         },
         body: JSON.stringify(credentials)
     });
-    console.log(JSON.stringify(credentials));
     if(res.ok){
         const user = await res.json();
         return user;
@@ -35,5 +37,25 @@ async function getUserInfo(){
         throw user;
 }
 
-const API = {login, logout, getUserInfo};
+async function getAllMemes() {
+  const response = await fetch("/api/memes/all");
+  const memesJson = await response.json();
+  if (response.ok) {
+    return memesJson.map((meme) => Meme.from(meme));
+  } else {
+    throw memesJson;
+  }
+}
+
+async function getPublicMemes() {
+  const response = await fetch("/api/memes/public");
+  const memesJson = await response.json();
+  if (response.ok) {
+    return memesJson.map((meme) => Meme.from(meme));
+  } else {
+    throw memesJson;
+  }
+}
+
+const API = {login, logout, getUserInfo, getAllMemes, getPublicMemes};
 export default API;

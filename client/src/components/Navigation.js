@@ -1,5 +1,6 @@
 import {Navbar, Nav, Button} from 'react-bootstrap/';
 import {DoorOpen, DoorClosed, AspectRatio, PlusCircle, House} from 'react-bootstrap-icons';
+import {Link, Redirect, useLocation} from 'react-router-dom';
 import API from '../API';
 
 function Navigation(props){
@@ -19,10 +20,11 @@ function Navigation(props){
                     <Navbar.Brand>
                         {'Welcome ' + props.userInfo.name +"!"}
                     </Navbar.Brand>
-                    <Button className="mr-2" variant="success">
-                        <House className="mr-2" size="30"/>
-                        Home
-                    </Button>
+                    <Link to="/">
+                        <Button className="mr-2" variant="warning">
+                            <House size="30"/>
+                        </Button>
+                    </Link>
                     <Button className="mr-2" variant="success">
                         <PlusCircle className="mr-2" size="30"/>
                         Create new meme
@@ -34,9 +36,11 @@ function Navigation(props){
                     </>
                  :
                  <>
-                    <Button className="mr-2" variant="warning">
-                        <House size="30"/>
-                    </Button>
+                    <Link to="/">
+                        <Button className="mr-2" variant="warning">
+                            <House size="30"/>
+                        </Button>
+                    </Link>
                     <Button variant="success" onClick={() => props.setShowLoginModal(true)}>
                         <DoorOpen className="mr-2" size="30"/>
                         Login
