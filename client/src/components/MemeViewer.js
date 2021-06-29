@@ -1,6 +1,7 @@
 import {Image, Container, Row, Col} from 'react-bootstrap/'
 import img from './2.jpg'
 function MemeViewer(props){
+    
 
     var style = {backgroundImage: `url(${img})`};
     return(

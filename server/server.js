@@ -129,6 +129,7 @@ app.get("/api/images/:id", async (req, res) =>{
   }
 });
 
+/*
 //SEND ALL IMAGE RESOURCES
 app.get("/api/images", async (req, res) =>{
   try{
@@ -145,7 +146,6 @@ app.get("/api/images", async (req, res) =>{
 });
 
 //LIST THE INFOS OF AN IMAGE
-/*
 app.get('/api/images/info/:id', async (req, res) => {
   try{
     const imageinfo = await dao.getImageInfo(req.params.id);
@@ -164,10 +164,9 @@ app.get('/api/images/info/:id', async (req, res) => {
 app.get("/api/images/info", async (req, res) => {
   try{
     const i = await dao.getImagesInfo();
-    console.log(i);
     res.json(i);
   }
-  catch (e){
+  catch(e){
     res.status(500).end();
   }
 });

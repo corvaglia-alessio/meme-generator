@@ -136,7 +136,7 @@ exports.getImagesInfo = () => {
                 centerright: i.centerright,
                 downleft: i.downleft,
                 downcenter: i.downcenter,
-                downright: i.downright,
+                downright: i.downright
             }));
             resolve(images);
             }
