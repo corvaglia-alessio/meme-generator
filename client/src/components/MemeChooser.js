@@ -11,7 +11,7 @@ function MemeChooser(props){
                 </Col>
             </Row>
             <Row className="text-center chooser">
-                {props.memes.map((m) => (<MemeCard meme={m} key={m.id} userInfo={props.userInfo} loggedIn={props.loggedIn}/>))}
+                {props.memes.map((m) => (<MemeCard view="true" meme={m} key={m.id} userInfo={props.userInfo} loggedIn={props.loggedIn}/>))}
             </Row>
         </Container>
     )

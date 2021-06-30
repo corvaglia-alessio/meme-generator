@@ -79,9 +79,11 @@
   overflow: hidden;
 }
 .Details{
-  position: relative;
-  top: 50%;
-  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .Editor{

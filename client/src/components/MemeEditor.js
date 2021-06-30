@@ -4,13 +4,13 @@ import {CheckCircle} from 'react-bootstrap-icons';
 import { useState } from 'react';
 
 function MemeEditor(props) {
-    const [title, setTitle] = useState(props.title);
-    const [text1, setText1] = useState(props.text1);
-    const [text2, setText2] = useState(props.text2);
-    const [text3, setText3] = useState(props.text3);
-    const [color, setColor] = useState(props.color);
-    const [font, setFont] = useState(props.font);
-    const [pub, setPub] = useState(props.pub);
+    const [title, setTitle] = useState(props.meme===0 ? "" : props.meme.title);
+    const [text1, setText1] = useState(props.meme===0 ? "" : props.meme.title);
+    const [text2, setText2] = useState(props.meme===0 ? "" : props.meme.title);
+    const [text3, setText3] = useState(props.meme===0 ? "" : props.meme.title);
+    const [color, setColor] = useState(props.meme===0 ? "" : props.meme.color);
+    const [font, setFont] = useState(props.meme===0 ? "" : props.meme.font);
+    const [pub, setPub] = useState(props.meme===0 ? "" : props.meme.pub);
     const [err, setErr] = useState(false);
 
     const sub = async (event) => {
@@ -35,7 +35,7 @@ function MemeEditor(props) {
     return (
             <Row>
                 <Col className="">
-                    <MemeViewer text1={text1} text2={text2} text3={text3} font={font} color={color}/>
+                    <MemeViewer img={props.img} text1={text1} text2={text2} text3={text3} font={font} color={color}/>
                 </Col>
                 <Col className="mt-5">
                     <Form onSubmit={sub}>

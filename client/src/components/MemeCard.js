@@ -1,5 +1,6 @@
 import {Lock, Unlock, Subtract, Trash, AspectRatio} from 'react-bootstrap-icons';
 import {Card, Button} from 'react-bootstrap/'
+import {Link} from 'react-router-dom';
 
 function MemeCard(props) {
   return (
@@ -11,10 +12,16 @@ function MemeCard(props) {
             {props.meme.pub ? <><Unlock color="grey" className="" size= "20"/> This meme is public</> : <><Lock color="grey" className="" size= "20"/> This meme is protected</>}
             {props.meme.copy ? <><Subtract color="grey" className="mr-2 ml-3" size= "20"/>This meme is a copy</> : <></> }
             </p>
-            <Button variant="success" className="mr-2 ">
-              <AspectRatio color="white" className="mr-2" size= "18"/>
-              View Meme
-            </Button>
+            {props.view === "true" ? 
+            <Link to={"/view/"+props.meme.id}>
+              <Button variant="success" className="mr-2 ">
+                <AspectRatio color="white" className="mr-2" size= "18"/>
+                View Meme
+              </Button>
+            </Link>
+            :
+            <></>
+            }
             {props.loggedIn ? 
               <Button variant="primary" className="mr-2 ">
                 <Subtract color="white" className="mr-2" size= "18"/>

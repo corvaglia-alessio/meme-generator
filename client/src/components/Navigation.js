@@ -1,6 +1,6 @@
 import {Navbar, Nav, Button} from 'react-bootstrap/';
 import {DoorOpen, DoorClosed, AspectRatio, PlusCircle, House} from 'react-bootstrap-icons';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import API from '../API';
 
 function Navigation(props){
@@ -10,7 +10,7 @@ function Navigation(props){
         props.setLoggedIn(false);
     }
 
-    return(
+    return( 
         <Navbar bg="primary" variant="dark" sticky="top">
             <AspectRatio color="white" className="mr-2" size= "30"/>
             <Navbar.Brand>MemeGenerator</Navbar.Brand>
@@ -32,10 +32,12 @@ function Navigation(props){
                             Create new meme
                         </Button>
                     </Link>
-                    <Button variant="danger" onClick={logout}>
-                        <DoorClosed className="mr-2" size="30"/>
+                    <Link to="/">
+                        <Button variant="danger" onClick={logout}>
+                            <DoorClosed className="mr-2" size="30"/>
                             Logout
-                    </Button>
+                        </Button>
+                    </Link>
                     </>
                  :
                  <>

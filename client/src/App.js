@@ -60,17 +60,16 @@ function App() {
     getFnts().then((fs) => {setFonts(fs)});
   }, []);
 
-  //SISTEMARE LOGIN SU EDITOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   return (
     <Router>
       <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn} userInfo={userInfo} setShowLoginModal={setShowLoginModal}/>
       <LoginModal show={showLoginModal} setLoggedIn={setLoggedIn} setUserInfo={setUserInfo} setShowLoginModal={setShowLoginModal} onHide={() => setShowLoginModal(false)}/>
       <Container fluid>
         <Switch>
-          <Route path="/view" render={() => <MemeDetails/>}/>
+          <Route path="/view/:id" render={({match}) => <MemeDetails loggedIn={loggedIn} userInfo={userInfo} img={images.find(i => i.id === (memes.find(m => m.id === parseInt(match.params.id)).id))} meme={memes.find(m => m.id === parseInt(match.params.id))} fonts={fonts}/>}/>
           <Route path="/imgchooser" render={() => loggedIn ? <ImageChooser imgs={images}/> : <h1 className="text-center">You are not logged in!</h1>}/>
-          <Route path="/editor/:id" render={() => loggedIn ? <MemeEditor fonts={fonts} memes={memes} imgs={images}/> : <h1 className="text-center">You are not logged in!</h1>}/>
-          <Route path="/copy/:id" render={() => loggedIn ? <MemeEditor fonts={fonts} memes={memes} imgs={images}/> : <h1 className="text-center">You are not logged in!</h1>}/>
+          <Route path="/editor/:id" render={({match}) => loggedIn ? <MemeEditor img={images.find(i => i.id === parseInt(match.params.id))} fonts={fonts} meme=""/> : <h1 className="text-center">You are not logged in!</h1>}/>
+          <Route path="/copy/:id" render={({match}) => loggedIn ? <MemeEditor img={images.find(i => i.id === memes.find(m => m.id === parseInt(match.params.id).id))} fonts={fonts} meme={memes.find(m => m.id === parseInt(match.params.id))}/> : <h1 className="text-center">You are not logged in!</h1>}/>
           <Route path="/" exact render={() => <MemeChooser memes={memes} loggedIn={loggedIn} userInfo={userInfo}/> }/>
           <Route render={() => <h1 className="text-center text-danger">404: Not Found!</h1> }/>
         </Switch>
