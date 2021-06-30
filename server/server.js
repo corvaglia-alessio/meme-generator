@@ -115,7 +115,8 @@ app.get("/api/memes/public", async (req, res) => {
 });
 
 //SEND AN IMAGE RESOURCE
-app.get("/api/images/:id", async (req, res) =>{
+
+app.get("/api/images/file/:id", async (req, res) =>{
   try{
     const image = await dao.getImagePath(req.params.id);
     if(image.error)
@@ -160,6 +161,7 @@ app.get('/api/images/info/:id', async (req, res) => {
 });
 */
 
+
 //LIST THE INFOS OF ALL IMAGES
 app.get("/api/images/info", async (req, res) => {
   try{
@@ -170,6 +172,7 @@ app.get("/api/images/info", async (req, res) => {
     res.status(500).end();
   }
 });
+
 
 //LIST THE AVAILABLE FONTS
 app.get("/api/fonts", async (req, res) => {

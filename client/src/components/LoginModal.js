@@ -26,7 +26,6 @@ function LoginModal(props) {
     if(valid){
       try{
         const user = await API.login(credentials);
-        console.log(user);
         props.setUserInfo(user);
         props.setLoggedIn(true);
         props.setShowLoginModal(false);
