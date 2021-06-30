@@ -144,6 +144,24 @@ exports.getImagesInfo = () => {
     });
 }
 
+exports.getFonts = () => {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM fonts";
+        database.all(sql, [], (e, rows) => {
+            if(e){
+                reject(e);
+                return;
+            }
+            const fonts = rows.map((f) => ({
+                id: f.id,
+                font: f.font,
+                size: f.size
+            }));
+            resolve(fonts);
+        });
+    });
+};
+
 exports.getImagePath = (id) => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT path FROM images WHERE id = ?';

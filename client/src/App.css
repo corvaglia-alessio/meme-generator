@@ -13,16 +13,31 @@
   }
 }
 
+.mytop{
+  position: inherit;
+  top: 20%;
+}
+
+.low{
+  position: inherit;
+  top: 51%;
+}
+
+.middle{
+  position: inherit;
+  top: 32%;
+}
+
 .mytext-up{
-  margin-top: 5%;
+  height: 207px;
 }
 
 .mytext-center{
-  margin-top: 25%;
+  height: 207px;
 }
 
 .mytext-down{
-  margin-top: 28%;
+  height: 206px;
 }
 
 .Meme {
@@ -48,6 +63,9 @@
   color: #61dafb;
 }
 
+.text-cut{
+  overflow: hidden;
+}
 .Details{
   position: relative;
   top: 50%;

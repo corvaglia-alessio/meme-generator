@@ -1,7 +1,6 @@
 import {Navigation} from './components/Navigation.js'
 import {LoginModal} from './components/LoginModal.js'
 import {MemeEditor} from './components/MemeEditor.js'
-import {MemeViewer} from './components/MemeViewer.js'
 import { ImageChooser } from './components/ImageChooser.js'
 import { MemeChooser } from './components/MemeChooser.js'
 import {MemeDetails} from './components/MemeDetails'
@@ -19,6 +18,7 @@ function App() {
   const [userInfo, setUserInfo] = useState({});
   const [memes, setMemes] = useState([]);
   const [images, setImages] = useState([]);
+  const [fonts, setFonts] = useState([]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -33,6 +33,7 @@ function App() {
     checkAuth();
   }, []);
 
+  //load memes every time login and logout operations are performed
   useEffect(() => {
     const getMemes = async () => {
       if(loggedIn){
@@ -47,11 +48,16 @@ function App() {
   }, [loggedIn]);
 
 
+  //load images and fonts only at mount time
   useEffect(() => {
     const getImg = async () => {
       return await API.getImages();
     }
+    const getFnts = async () => {
+      return await API.getFonts();
+    }
     getImg().then((im) => {setImages(im)});
+    getFnts().then((fs) => {setFonts(fs)});
   }, []);
 
   return (
@@ -61,27 +67,13 @@ function App() {
       <Container fluid>
         <Switch>
           <Route path="/view">
-            <Row>
-              <Col>
-                <MemeViewer/>
-              </Col>
-              <Col>
-                <MemeDetails/>
-              </Col>
-            </Row>
+            <MemeDetails/>
           </Route>
           <Route path="/imgchooser">
             <ImageChooser imgs={images}/>
           </Route>
           <Route path="/editor">
-            <Row>
-              <Col>
-                <MemeViewer/>
-              </Col>
-              <Col>
-                <MemeEditor/>
-              </Col>
-            </Row>
+            <MemeEditor fonts={fonts}/>
           </Route>
           <Route path="/" exact>
             <MemeChooser memes={memes} loggedIn={loggedIn} userInfo={userInfo}/>

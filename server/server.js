@@ -171,6 +171,17 @@ app.get("/api/images/info", async (req, res) => {
   }
 });
 
+//LIST THE AVAILABLE FONTS
+app.get("/api/fonts", async (req, res) => {
+  try{
+    const f = await dao.getFonts();
+    res.json(f);
+  }
+  catch(e){
+    res.status(500).end();
+  }
+});
+
 // activate the server
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
