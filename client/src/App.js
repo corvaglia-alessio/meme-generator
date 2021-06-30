@@ -67,21 +67,12 @@ function App() {
       <LoginModal show={showLoginModal} setLoggedIn={setLoggedIn} setUserInfo={setUserInfo} setShowLoginModal={setShowLoginModal} onHide={() => setShowLoginModal(false)}/>
       <Container fluid>
         <Switch>
-          <Route path="/view">
-            <MemeDetails/>
-          </Route>
-          <Route path="/imgchooser">
-            <ImageChooser imgs={images}/>
-          </Route>
-          <Route path="/editor">
-            <MemeEditor fonts={fonts}/>
-          </Route>
-          <Route path="/" exact>
-            <MemeChooser memes={memes} loggedIn={loggedIn} userInfo={userInfo}/>
-          </Route>
-          <Route>
-            <h1>404: Not Found!</h1>
-          </Route>
+          <Route path="/view" render={() => <MemeDetails/>}/>
+          <Route path="/imgchooser" render={() => loggedIn ? <ImageChooser imgs={images}/> : <h1 className="text-center">You are not logged in!</h1>}/>
+          <Route path="/editor/:id" render={() => loggedIn ? <MemeEditor fonts={fonts} memes={memes} imgs={images}/> : <h1 className="text-center">You are not logged in!</h1>}/>
+          <Route path="/copy/:id" render={() => loggedIn ? <MemeEditor fonts={fonts} memes={memes} imgs={images}/> : <h1 className="text-center">You are not logged in!</h1>}/>
+          <Route path="/" exact render={() => <MemeChooser memes={memes} loggedIn={loggedIn} userInfo={userInfo}/> }/>
+          <Route render={() => <h1 className="text-center text-danger">404: Not Found!</h1> }/>
         </Switch>
       </Container>
     </Router>
