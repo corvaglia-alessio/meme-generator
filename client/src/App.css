@@ -13,6 +13,18 @@
   }
 }
 
+.imageCard{
+  max-width: 30% ;
+}
+
+.card {
+  width: max-content;
+}
+
+.chooser{
+  justify-content: space-evenly;
+}
+
 .mytop{
   position: inherit;
   top: 20%;

@@ -1,5 +1,5 @@
-import {Container, Image, Row, Col} from 'react-bootstrap/'
-// import img from './2.jpg'
+import {Container, Row, Col} from 'react-bootstrap/'
+import {ImageCard} from './ImageCard'
 
 function ImageChooser(props){
     return(
@@ -9,7 +9,9 @@ function ImageChooser(props){
                     <h1>Choose the image for your meme</h1>
                 </Col>
             </Row>
-            {props.imgs.map((i) => (<Image key={i.id} src={i.path} rounded/>))}
+            <Row className="text-center chooser">
+                {props.imgs.map((i) => (<ImageCard key={i.id} image={i} className="m-2"></ImageCard>))}
+            </Row>
         </Container>
     )
 }

@@ -1,4 +1,4 @@
-import {FormControl, InputGroup, Form, Container, Alert, Button, Row, Col} from 'react-bootstrap/';
+import {FormControl, InputGroup, Form, Alert, Button, Row, Col} from 'react-bootstrap/';
 import {MemeViewer} from './MemeViewer.js'
 import {CheckCircle} from 'react-bootstrap-icons';
 import { useState } from 'react';

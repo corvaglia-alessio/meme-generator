@@ -5,7 +5,7 @@ import { ImageChooser } from './components/ImageChooser.js'
 import { MemeChooser } from './components/MemeChooser.js'
 import {MemeDetails} from './components/MemeDetails'
 import {useState, useEffect} from 'react'
-import {Row, Col, Container} from 'react-bootstrap/'
+import {Container} from 'react-bootstrap/'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import API from './API';

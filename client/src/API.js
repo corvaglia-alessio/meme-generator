@@ -63,9 +63,25 @@ async function getImages() {
   const response = await fetch("/api/images/info");
   const imagesJson = await response.json();
   if (response.ok) {
+    for(let i of imagesJson){
+      i["image"] = await getImage(i.id).catch((e) => {
+        throw e;
+      });
+    }
     return imagesJson.map((i) => Image.from(i));
   } else {
     throw imagesJson;
+  }
+}
+
+async function getImage(id) {
+  const response = await fetch("/api/images/file/"+id);
+  const img = await response.blob();
+  if (response.ok) {
+    return URL.createObjectURL(img);
+  } 
+  else {
+    throw img;
   }
 }
 

@@ -1,4 +1,4 @@
-import {Button, Container, InputGroup} from 'react-bootstrap/';
+import {Container} from 'react-bootstrap/';
 
 function MemeDetails(props) {
   return (

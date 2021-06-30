@@ -1,6 +1,6 @@
 import {Navbar, Nav, Button} from 'react-bootstrap/';
 import {DoorOpen, DoorClosed, AspectRatio, PlusCircle, House} from 'react-bootstrap-icons';
-import {Link, Redirect, useLocation} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import API from '../API';
 
 function Navigation(props){
@@ -22,7 +22,8 @@ function Navigation(props){
                     </Navbar.Brand>
                     <Link to="/">
                         <Button className="mr-2" variant="warning">
-                            <House size="30"/>
+                            <House size="30" className="mr-2"/>
+                            Home
                         </Button>
                     </Link>
                     <Link to="/imgchooser">
@@ -40,7 +41,8 @@ function Navigation(props){
                  <>
                     <Link to="/">
                         <Button className="mr-2" variant="warning">
-                            <House size="30"/>
+                            <House size="30" className="mr-2"/>
+                            Home
                         </Button>
                     </Link>
                     <Button variant="success" onClick={() => props.setShowLoginModal(true)}>

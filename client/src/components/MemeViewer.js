@@ -1,5 +1,6 @@
 import {Container, Row, Col} from 'react-bootstrap/'
 import img from './2.jpg'
+
 function MemeViewer(props){
     var bckg = {backgroundImage: `url(${img})`};
     var style = {fontFamily: props.font, color: props.color, fontSize: 30};
