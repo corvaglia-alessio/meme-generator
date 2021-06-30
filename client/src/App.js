@@ -60,6 +60,7 @@ function App() {
     getFnts().then((fs) => {setFonts(fs)});
   }, []);
 
+  //SISTEMARE LOGIN SU EDITOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   return (
     <Router>
       <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn} userInfo={userInfo} setShowLoginModal={setShowLoginModal}/>
