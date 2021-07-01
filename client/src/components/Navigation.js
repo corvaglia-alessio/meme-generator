@@ -1,6 +1,7 @@
-import {Navbar, Nav, Button} from 'react-bootstrap/';
-import {DoorOpen, DoorClosed, AspectRatio, PlusCircle, House} from 'react-bootstrap-icons';
+import {Navbar, Nav, Button, Image} from 'react-bootstrap/';
+import {DoorOpen, DoorClosed, PlusCircle, House} from 'react-bootstrap-icons';
 import {Link} from 'react-router-dom';
+import img from '../logo.ico'
 import API from '../API';
 
 function Navigation(props){
@@ -9,11 +10,10 @@ function Navigation(props){
         await API.logout();
         props.setLoggedIn(false);
     }
-
     return( 
         <Navbar bg="primary" variant="dark" sticky="top">
-            <AspectRatio color="white" className="mr-2" size= "30"/>
-            <Navbar.Brand>MemeGenerator</Navbar.Brand>
+            <Image src={img}></Image>
+            <Navbar.Brand className="ml-2">MemeGenerator</Navbar.Brand>
             <Nav className="ml-auto">
                { props.loggedIn ? 
                     <>
@@ -29,7 +29,7 @@ function Navigation(props){
                     <Link to="/imgchooser">
                         <Button className="mr-2" variant="success">
                             <PlusCircle className="mr-2" size="30"/>
-                            Create new meme
+                            New meme
                         </Button>
                     </Link>
                     <Link to="/">

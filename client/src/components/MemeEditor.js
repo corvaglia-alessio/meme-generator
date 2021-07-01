@@ -4,33 +4,45 @@ import {CheckCircle} from 'react-bootstrap-icons';
 import { useState } from 'react';
 
 function MemeEditor(props) {
+
     const [title, setTitle] = useState(props.meme===0 ? "" : props.meme.title);
     const [text1, setText1] = useState(props.meme===0 ? "" : props.meme.title);
     const [text2, setText2] = useState(props.meme===0 ? "" : props.meme.title);
     const [text3, setText3] = useState(props.meme===0 ? "" : props.meme.title);
     const [color, setColor] = useState(props.meme===0 ? "" : props.meme.color);
-    const [font, setFont] = useState(props.meme===0 ? "" : props.meme.font);
+    const [font, setFont] = useState(props.meme===0 ? props.fonts[0].font : props.meme.font); //sistemare il font
     const [pub, setPub] = useState(props.meme===0 ? "" : props.meme.pub);
     const [err, setErr] = useState(false);
 
     const sub = async (event) => {
 
-    event.preventDefault();
-    setErr(false);
+        event.preventDefault();
+        setErr(false);
 
-    let valid = true;
-    if (title === '' || ((text1 === '') && (text2 === '') && (text3===''))) {
-      valid = false;
-      setErr(true);
+        let valid = true;
+        if (title === '' || ((text1 === '') && (text2 === '') && (text3===''))) {
+        valid = false;
+        setErr(true);
+        }
+
+        if(valid){
+        try{
+        }
+        catch (e) {
+        }
+        }
     }
 
-    if(valid){
-      try{
-      }
-      catch (e) {
-      }
-    }
-  }
+    let i = 0;
+    if(props.img.upleft) i++;
+    if(props.img.upcenter) i++;
+    if(props.img.upright) i++;
+    if(props.img.centerleft) i++;
+    if(props.img.centercenter) i++;
+    if(props.img.centerright) i++;
+    if(props.img.downleft) i++;
+    if(props.img.downcenter) i++;
+    if(props.img.downright) i++;
 
     return (
             <Row>
@@ -42,15 +54,33 @@ function MemeEditor(props) {
                         <InputGroup className="mb-5 mt-2"> 
                             <FormControl placeholder="Meme title" aria-label="Meme title" value={title} onChange={(ev)=>setTitle(ev.target.value)}/>
                         </InputGroup>
-                        <InputGroup className="mb-3">
-                            <FormControl placeholder="Text 1" aria-label="Text 1" value={text1} onChange={(ev)=>setText1(ev.target.value)}/>
-                        </InputGroup>
-                        <InputGroup className="mb-3">
-                            <FormControl placeholder="Text 2" aria-label="Text 2" value={text2} onChange={(ev)=>setText2(ev.target.value)}/>
-                        </InputGroup>
-                        <InputGroup className="mb-5">
-                            <FormControl placeholder="Text 3"  aria-label="Text 3" value={text3} onChange={(ev)=>setText3(ev.target.value)}/>
-                        </InputGroup>
+                        { i>=1 ? 
+                            <InputGroup className="mb-3">
+                                <FormControl placeholder="Text 1" aria-label="Text 1" value={text1} onChange={(ev)=>setText1(ev.target.value)}/>
+                            </InputGroup>
+                            :
+                            <InputGroup className="mb-3">
+                                <FormControl placeholder="Text 1" aria-label="Text 1" value={text1} onChange={(ev)=>setText1(ev.target.value)} disabled/>
+                            </InputGroup>
+                        }
+                        { i>=2 ?
+                            <InputGroup className="mb-3">
+                                <FormControl placeholder="Text 2" aria-label="Text 2" value={text2} onChange={(ev)=>setText2(ev.target.value)}/>
+                            </InputGroup>
+                            :
+                            <InputGroup className="mb-3">
+                                <FormControl placeholder="Text 2" aria-label="Text 2" value={text2} onChange={(ev)=>setText2(ev.target.value)} disabled/>
+                            </InputGroup>
+                        }
+                        {i>=3 ?
+                            <InputGroup className="mb-5">
+                                <FormControl placeholder="Text 3"  aria-label="Text 3" value={text3} onChange={(ev)=>setText3(ev.target.value)}/>
+                            </InputGroup>
+                            :
+                            <InputGroup className="mb-5">
+                                <FormControl placeholder="Text 3"  aria-label="Text 3" value={text3} onChange={(ev)=>setText3(ev.target.value)} disabled/>
+                            </InputGroup>
+                        }
                         <InputGroup className="mb-5">
                             <FormControl placeholder="Color" aria-label="Color" type="color" value={color} onChange={(ev)=>setColor(ev.target.value)}/>
                             <FormControl className="w-75" value={font} onChange={(ev)=>setFont(ev.target.value)} placeholder="Font" variant="success" aria-label="Font" as="select">
