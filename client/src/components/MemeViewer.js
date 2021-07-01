@@ -69,7 +69,7 @@ function MemeViewer(props){
     }
 
     var bckg = {backgroundImage: `url(${props.img.image})`};
-    var style = {fontFamily: props.font, color: props.color, fontSize: 30};
+    var style = {fontFamily: props.font, color: props.color, fontSize: 35};
     return(
         <Container style={bckg} className="Meme mt-5">
             <Row className="text-center mytext-up">

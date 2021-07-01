@@ -52,12 +52,17 @@
   height: 206px;
 }
 
+.mycard{
+  position: relative;
+  top: 30%;
+  left: 25%;
+}
+
 .Meme {
-    margin-top: 12%;
     min-width: 1054px;
     min-height: 620px;
     background-repeat: no-repeat;
-    border-radius: 10px;
+    
 }
 
 .App-header {

@@ -1,4 +1,4 @@
-import {Row, Col} from 'react-bootstrap/';
+import {Row, Col, Container} from 'react-bootstrap/';
 import {MemeViewer} from './MemeViewer.js'
 import {MemeCard} from './MemeCard.js'
 
@@ -45,16 +45,19 @@ function MemeDetails(props) {
   }
 
   return (
+    <Container fluid>
       <Row>
         <Col>
-          <MemeViewer img={props.img} text1={texts[0]} text2={texts[1]} text3={texts[2]} color={props.meme.color} font={props.meme.font} size={props.meme.size}/>
+          <MemeViewer img={props.img} text1={texts[0]} text2={texts[1]} text3={texts[2]} color={props.meme.color} font={props.meme.font}/>
         </Col>
-        <Col>
-          <Row className="mt-4 text-center Details">
+        <Col className="mt-5">
+          <div className="mycard">
             <MemeCard view="false" meme={props.meme} userInfo={props.userInfo} loggedIn={props.loggedIn}/>
-          </Row>
+          </div>
         </Col>
       </Row>
+    </Container>
+      
   );
 }
 

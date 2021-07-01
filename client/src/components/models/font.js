@@ -1,12 +1,11 @@
 class Font {
-    constructor(id, font, size){
+    constructor(id, font){
         this.id = id;
         this.font = font;
-        this.size = size;
     }
 
     static from(json) {
-       return new Font(json.id, json.font, json.size);
+       return new Font(json.id, json.font);
     }
 }
 

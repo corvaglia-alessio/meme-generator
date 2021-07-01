@@ -22,11 +22,13 @@ function MemeCard(props) {
             :
             <></>
             }
-            {props.loggedIn ? 
+            {props.loggedIn ?
+            <Link to={"/copy/"+props.meme.id}>
               <Button variant="primary" className="mr-2 ">
                 <Subtract color="white" className="mr-2" size= "18"/>
                   Make a copy
               </Button>
+            </Link> 
               :
               <Button variant="primary" className="mr-2 "disabled>
                 <Subtract color="white" className="mr-2" size= "18"/>

@@ -4,15 +4,29 @@ import {CheckCircle} from 'react-bootstrap-icons';
 import { useState } from 'react';
 
 function MemeEditor(props) {
-
-    const [title, setTitle] = useState(props.meme===0 ? "" : props.meme.title);
-    const [text1, setText1] = useState(props.meme===0 ? "" : props.meme.title);
-    const [text2, setText2] = useState(props.meme===0 ? "" : props.meme.title);
-    const [text3, setText3] = useState(props.meme===0 ? "" : props.meme.title);
-    const [color, setColor] = useState(props.meme===0 ? "" : props.meme.color);
-    const [font, setFont] = useState(props.meme===0 ? props.fonts[0].font : props.meme.font); //sistemare il font
-    const [pub, setPub] = useState(props.meme===0 ? "" : props.meme.pub);
+    const [title, setTitle] = useState(props.meme==="0" ? "" : props.meme.title);
+    const [color, setColor] = useState(props.meme==="0" ? "#000000" : props.meme.color);
+    const [font, setFont] = useState(props.meme==="0" ? props.fonts[0].font : props.meme.font);
+    const [pub, setPub] = useState(props.meme==="0" ? false : props.meme.pub);
     const [err, setErr] = useState(false);
+
+    let cnt = 0;
+    let input = ['', '', ''];
+     if(props.meme!==0){
+        if(props.meme.upleft) {input[cnt]=props.meme.upleft; cnt++}
+        if(props.meme.upcenter) {input[cnt]=props.meme.upcenter; cnt++}
+        if(props.meme.upright) {input[cnt]=props.meme.upright; cnt++}
+        if(props.meme.centerleft) {input[cnt]=props.meme.centerleft; cnt++}
+        if(props.meme.centercenter) {input[cnt]=props.meme.centercenter; cnt++}
+        if(props.meme.centerright) {input[cnt]=props.meme.centerright; cnt++}
+        if(props.meme.downleft) {input[cnt]=props.meme.downleft; cnt++}
+        if(props.meme.downcenter) {input[cnt]=props.meme.downcenter; cnt++}
+        if(props.meme.downright) {input[cnt]=props.meme.downright; cnt++}
+    }
+
+    const [text1, setText1] = useState(input[0]);
+    const [text2, setText2] = useState(input[1]);
+    const [text3, setText3] = useState(input[2]);
 
     const sub = async (event) => {
 
@@ -47,7 +61,7 @@ function MemeEditor(props) {
     return (
             <Row>
                 <Col className="">
-                    <MemeViewer img={props.img} text1={text1} text2={text2} text3={text3} font={font} color={color}/>
+                    <MemeViewer img={props.img} text1={text1} text2={text2} text3={text3} font={font} color={color} />
                 </Col>
                 <Col className="mt-5">
                     <Form onSubmit={sub}>
@@ -88,7 +102,12 @@ function MemeEditor(props) {
                             </FormControl>
                         </InputGroup>
                         <InputGroup className="mb-5">
-                            <Form.Check aria-label="Public" unchecked={pub} onChange={(ev)=>setPub(ev.target.value)}/> Public meme
+                            { props.meme!=="0" && props.meme.pub===0 ?
+                                <Form.Check type="checkbox" aria-label="Public" checked={pub} onChange={(ev)=>setPub(ev.target.checked)} disabled/>
+                                :
+                                <Form.Check type="checkbox" aria-label="Public" checked={pub} onChange={(ev)=>setPub(ev.target.checked)}/>
+                            }
+                            Public meme
                         </InputGroup>
                         <InputGroup className="mb-5">
                             <Button variant="success" type="submit">
