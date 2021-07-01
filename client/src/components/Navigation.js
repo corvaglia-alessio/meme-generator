@@ -1,6 +1,6 @@
 import {Navbar, Nav, Button} from 'react-bootstrap/';
 import {DoorOpen, DoorClosed, AspectRatio, PlusCircle, House} from 'react-bootstrap-icons';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import API from '../API';
 
 function Navigation(props){

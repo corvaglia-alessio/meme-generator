@@ -11,7 +11,7 @@ function MemeDetails(props) {
         </Col>
         <Col>
           <Row className="mt-4 text-center Details">
-            <MemeCard view="false" loggedIn={props.loggedIn} userInfo={props.userInfo} meme={props.meme} userInfo={props.userInfo} loggedIn={props.loggedIn}/>
+            <MemeCard view="false" meme={props.meme} userInfo={props.userInfo} loggedIn={props.loggedIn}/>
           </Row>
         </Col>
       </Row>
