@@ -4,6 +4,7 @@ import {MemeEditor} from './components/MemeEditor.js'
 import { ImageChooser } from './components/ImageChooser.js'
 import { MemeChooser } from './components/MemeChooser.js'
 import {MemeDetails} from './components/MemeDetails'
+import {Notify} from './components/Notify'
 import {useState, useEffect} from 'react'
 import {Container, Alert} from 'react-bootstrap/'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -20,6 +21,7 @@ function App() {
   const [images, setImages] = useState([]);
   const [fonts, setFonts] = useState([]);
   const [dirty, setDirty] = useState(false);
+  const [showMsg, setShowMsg] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -44,6 +46,10 @@ function App() {
         return await API.getPublicMemes();
       }
     }
+
+    if(dirty) //show the message of success only when a meme is added or removed
+      setShowMsg(true);
+
     setDirty(false);
     getMemes().then((me) => {me.sort((first, second) => second.id-first.id); setMemes(me)}); //put memes from the most recent to the least
   }, [loggedIn, dirty]);
@@ -66,13 +72,14 @@ function App() {
       <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn} userInfo={userInfo} setShowLoginModal={setShowLoginModal}/>
       <LoginModal show={showLoginModal} setLoggedIn={setLoggedIn} setUserInfo={setUserInfo} setShowLoginModal={setShowLoginModal} onHide={() => setShowLoginModal(false)}/>
       <Container fluid>
+        <Notify variant="success" show={showMsg} setShow={setShowMsg} msg="Operation performed successfully!"/>
         <Switch>
           <Route path="/view/:id" render={({match}) => <MemeDetails setDirty={setDirty} loggedIn={loggedIn} userInfo={userInfo} img={images.find(i => i.id === (memes.find(m => m.id === parseInt(match.params.id)).imageid))} meme={memes.find(m => m.id === parseInt(match.params.id))} fonts={fonts}/>}/>
-          <Route path="/imgchooser" render={() => loggedIn ? <ImageChooser imgs={images}/> : <Alert variant="danger" className="m-3">You are not logged in!</Alert>}/>
-          <Route path="/editor/:id" render={({match}) => loggedIn ? <MemeEditor setDirty={setDirty} userInfo={userInfo} img={images.find(i => i.id === parseInt(match.params.id))} fonts={fonts} meme="0"/> : <Alert variant="danger" className="m-3">You are not logged in!</Alert>}/>
-          <Route path="/copy/:id" render={({match}) => loggedIn ? <MemeEditor setDirty={setDirty} userInfo={userInfo} img={images.find(i => i.id === (memes.find(m => m.id === parseInt(match.params.id)).imageid))} fonts={fonts} meme={memes.find(m => m.id === parseInt(match.params.id))}/> : <Alert variant="danger" className="m-3">You are not logged in!</Alert>}/>
+          <Route path="/imgchooser" render={() => loggedIn ? <ImageChooser imgs={images}/> : <Notify variant="danger" show={showMsg} setShow={setShowMsg} msg="You are not logged in!"/>}/>
+          <Route path="/editor/:id" render={({match}) => loggedIn ? <MemeEditor setDirty={setDirty} userInfo={userInfo} img={images.find(i => i.id === parseInt(match.params.id))} fonts={fonts} meme="0"/> : <Notify variant="danger" show={showMsg} setShow={setShowMsg} msg="You are not logged in!"/>}/>
+          <Route path="/copy/:id" render={({match}) => loggedIn ? <MemeEditor setDirty={setDirty} userInfo={userInfo} img={images.find(i => i.id === (memes.find(m => m.id === parseInt(match.params.id)).imageid))} fonts={fonts} meme={memes.find(m => m.id === parseInt(match.params.id))}/> : <Notify variant="danger" show={showMsg} setShow={setShowMsg} msg="You are not logged in!"/>}/>
           <Route path="/" exact render={() => <MemeChooser setDirty={setDirty} memes={memes} loggedIn={loggedIn} userInfo={userInfo}/> }/>
-          <Route render={() => <Alert variant="danger" className="m-3">Error 404: NOT FOUND!</Alert> }/>
+          <Route render={() => <Notify variant="danger" show={showMsg} setShow={setShowMsg} msg="Error 404: Not Found!"/>}/>
         </Switch>
       </Container>
     </Router>
