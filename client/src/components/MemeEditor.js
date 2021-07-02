@@ -2,6 +2,8 @@ import {FormControl, InputGroup, Form, Alert, Button, Row, Col} from 'react-boot
 import {MemeViewer} from './MemeViewer.js'
 import {CheckCircle} from 'react-bootstrap-icons';
 import { useState } from 'react';
+import {Link} from 'react-router-dom';
+import API from '../API';
 
 function MemeEditor(props) {
     const [title, setTitle] = useState(props.meme==="0" ? "" : props.meme.title);
@@ -12,6 +14,7 @@ function MemeEditor(props) {
     const [err, setErr] = useState(false);
     const [msg, setMsg] = useState("");
 
+    //if it is a copy, initialize the form inputs for the 3 texts
     let cnt = 0;
     let input = ['', '', ''];
      if(props.meme!==0){
@@ -25,45 +28,11 @@ function MemeEditor(props) {
         if(props.meme.downcenter) {input[cnt]=props.meme.downcenter; cnt++}
         if(props.meme.downright) {input[cnt]=props.meme.downright; cnt++}
     }
-
     const [text1, setText1] = useState(input[0]);
     const [text2, setText2] = useState(input[1]);
     const [text3, setText3] = useState(input[2]);
 
-    const sub = async (event) => {
-
-        event.preventDefault();
-        setErr(false);
-        setMsg("");
-
-        let valid = true;
-
-        if (title === '') {
-            valid = false;
-            setMsg("Title cannot be empty!");
-            setErr(true);
-        }
-
-        if(((text1 === '') && (text2 === '') && (text3===''))){
-            valid = false;
-            setMsg("At least one text!");
-            setErr(true);
-        }
-
-        if(size==="" || size<0){
-            valid=false;
-            setMsg("Size should be a positive integer!");
-            setErr(true);
-        }
-
-        if(valid){
-        try{
-        }
-        catch (e) {
-        }
-        }
-    }
-
+    //count how many text area the image define in order to enable/disable text inputs
     let i = 0;
     if(props.img.upleft) i++;
     if(props.img.upcenter) i++;
@@ -75,13 +44,129 @@ function MemeEditor(props) {
     if(props.img.downcenter) i++;
     if(props.img.downright) i++;
 
+    const send = async () => {
+
+        //event.preventDefault();
+        setErr(false);
+        setMsg("");
+
+        //form validation
+        let valid = true;
+        if (title === '') {
+            valid = false;
+            setMsg("Title cannot be empty!");
+            setErr(true);
+        }
+        else if(((text1 === '') && (text2 === '') && (text3===''))){
+            valid = false;
+            setMsg("At least one text!");
+            setErr(true);
+        }
+        else if(size==="" || size<0){
+            valid=false;
+            setMsg("Size should be a positive integer!");
+            setErr(true);
+        }
+
+        if(valid){
+            //re-map from 3 texts to 9 texts
+            let texts = [];
+            let assigned = 0;
+            if(props.img.upleft){
+                if(assigned===0) texts[0]=text1;
+                else if(assigned===1) texts[0]=text2;
+                else if(assigned===2) texts[0]=text3;
+                else texts[0]="";
+                assigned++;
+            }
+            if(props.img.upcenter){
+                if(assigned===0) texts[1]=text1;
+                else if(assigned===1) texts[1]=text2;
+                else if(assigned===2) texts[1]=text3;
+                else texts[1]="";
+                assigned++;
+            }
+            if(props.img.upright){
+                if(assigned===0) texts[2]=text1;
+                else if(assigned===1) texts[2]=text2;
+                else if(assigned===2) texts[2]=text3;
+                else texts[2]="";
+                assigned++;
+            }
+            if(props.img.centerleft){
+                if(assigned===0) texts[3]=text1;
+                else if(assigned===1) texts[3]=text2;
+                else if(assigned===2) texts[3]=text3;
+                else texts[3]="";
+                assigned++;
+            }
+            if(props.img.centercenter){
+                if(assigned===0) texts[4]=text1;
+                else if(assigned===1) texts[4]=text2;
+                else if(assigned===2) texts[4]=text3;
+                else texts[4]="";
+                assigned++;
+            }
+            if(props.img.centerright){
+                if(assigned===0) texts[5]=text1;
+                else if(assigned===1) texts[5]=text2;
+                else if(assigned===2) texts[5]=text3;
+                else texts[5]="";
+                assigned++;
+            }
+            if(props.img.downleft){
+                if(assigned===0) texts[6]=text1;
+                else if(assigned===1) texts[6]=text2;
+                else if(assigned===2) texts[6]=text3;
+                else texts[6]="";
+                assigned++;
+            }
+            if(props.img.downcenter){
+                if(assigned===0) texts[7]=text1;
+                else if(assigned===1) texts[7]=text2;
+                else if(assigned===2) texts[7]=text3;
+                else texts[7]="";
+                assigned++;
+            }
+            if(props.img.downright){
+                if(assigned===0) texts[8]=text1;
+                else if(assigned===1) texts[8]=text2;
+                else if(assigned===2) texts[8]=text3;
+                else texts[8]="";
+                assigned++;
+            }
+            
+            //create the meme object
+            let m = {};
+            m.title = title;
+            m.imageid = props.img.id;
+            m.pub = pub ? 1 : 0;
+            m.userid = props.userInfo.id;
+            m.copy = props.meme==="0" ? 0 : 1;
+            m.color = color;
+            m.fontid = props.fonts.find(f => f.font === font).id;         
+            m.size = size;
+            m.upleft = props.img.upleft ? texts[0] : null;
+            m.upcenter = props.img.upcenter ? texts[1] : null;
+            m.upright = props.img.upright ? texts[2] : null;
+            m.centerleft = props.img.centerleft ? texts[3] : null;
+            m.centercenter = props.img.centercenter ? texts[4] : null;
+            m.centerright = props.img.centerright ? texts[5] : null;
+            m.downleft = props.img.downleft ? texts[6] : null;
+            m.downcenter = props.img.downcenter ? texts[7] : null;
+            m.downright = props.img.downright ? texts[8] : null;
+            await API.addMeme(m);
+            props.setDirty(true);
+        }
+    }
+
     return (
             <Row>
                 <Col className="">
                     <MemeViewer img={props.img} text1={text1} text2={text2} text3={text3} font={font} color={color} size={size}/>
                 </Col>
                 <Col className="mt-5">
-                    <Form onSubmit={sub}>
+                    <Form onSubmit={send}>
                         <InputGroup className="mb-5 mt-2"> 
                             <FormControl placeholder="Meme title" aria-label="Meme title" value={title} onChange={(ev)=>setTitle(ev.target.value)}/>
                         </InputGroup>
@@ -120,7 +205,7 @@ function MemeEditor(props) {
                             <FormControl placeholder="Size" type="number" aria-label="Size" value={size} onChange={(ev)=>setSize(ev.target.value)}/>
                         </InputGroup>
                         <InputGroup className="mb-5">
-                            { props.meme!=="0" && props.meme.pub===0 ?
+                            { props.meme!=="0" && props.meme.pub===0 && props.userInfo.id !== props.meme.userid ?
                                 <Form.Check type="checkbox" aria-label="Public" checked={pub} onChange={(ev)=>setPub(ev.target.checked)} disabled/>
                                 :
                                 <Form.Check type="checkbox" aria-label="Public" checked={pub} onChange={(ev)=>setPub(ev.target.checked)}/>
@@ -128,10 +213,12 @@ function MemeEditor(props) {
                             Public meme
                         </InputGroup>
                         <InputGroup className="mb-5">
-                            <Button variant="success" type="submit">
-                                <CheckCircle color="white" className="mr-2" size= "30"/>
-                                Save
-                            </Button>
+                            <Link to="/">
+                                <Button variant="success" onClick={() => send()}>
+                                    <CheckCircle color="white" className="mr-2" size= "30"/>
+                                    Save
+                                </Button>
+                            </Link>
                         </InputGroup>
                         <Alert variant="danger" show={err}>
                             {msg}

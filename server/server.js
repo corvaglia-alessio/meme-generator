@@ -7,6 +7,7 @@ const dao = require('./dao');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session");
+const { check, validationResult } = require("express-validator");
 
 //PASSPORT SECTION FOR LOGIN AND LOGOUT
 passport.use(
@@ -149,6 +150,30 @@ app.get("/api/fonts", async (req, res) => {
   catch(e){
     res.status(500).end();
   }
+});
+
+//INSERT A NEW MEME
+app.post('/api/memes', loggedIn, [
+  check('title').notEmpty().isString(),
+  check('userid').isInt(),
+  check('copy').isInt({min: 0, max: 1}),
+  check('fontid').isInt(),
+  check('size').isInt(),
+  check('color').notEmpty().isString().isLength({min: 7, max: 7}),
+  ], 
+
+  async (req, res) => {
+    const e = validationResult(req);
+    if (!e.isEmpty()) {
+      return res.status(422).json({errors: e.array()});
+    }
+    try {
+      await dao.addMeme(req.body);
+      res.status(201).end();
+    } 
+    catch(err) {
+      res.status(503).json({error: "It's not possible to add the meme"});
+    }
 });
 
 // activate the server

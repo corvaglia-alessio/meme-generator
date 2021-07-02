@@ -153,3 +153,40 @@ exports.getImagePath = (id) => {
         });
     });
 }
+
+exports.addMeme = (meme) => {
+  return new Promise((resolve, reject) => {
+    const sql =
+      "INSERT INTO memes (title, imageid, pub, userid, copy, color, fontid, size, upleft, upcenter, upright, centerleft, centercenter, centerright, downleft, downcenter, downright) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    database.run(
+      sql,
+      [
+        meme.title,
+        meme.imageid,
+        meme.pub,
+        meme.userid,
+        meme.copy,
+        meme.color,
+        meme.fontid,
+        meme.size,
+        meme.upleft,
+        meme.upcenter,
+        meme.upright,
+        meme.centerleft,
+        meme.centercenter,
+        meme.centerright,
+        meme.downleft,
+        meme.downcenter,
+        meme.downright
+      ],
+      function (e) {
+        if (e) {
+            console.log(e);
+            reject(e);
+            return;
+        }
+        resolve(this.lastID);
+      }
+    );
+  });
+};

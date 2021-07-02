@@ -19,6 +19,7 @@ function App() {
   const [memes, setMemes] = useState([]);
   const [images, setImages] = useState([]);
   const [fonts, setFonts] = useState([]);
+  const [dirty, setDirty] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -33,7 +34,7 @@ function App() {
     checkAuth();
   }, []);
 
-  //load memes every time login and logout operations are performed
+  //load memes every time login and logout operations are performed and at each dirty SOLVE THIS ISSUE!
   useEffect(() => {
     const getMemes = async () => {
       if(loggedIn){
@@ -42,10 +43,10 @@ function App() {
       else{
         return await API.getPublicMemes();
       }
-    } 
-
-    getMemes().then((me) => {setMemes(me)});
-  }, [loggedIn]);
+    }
+    setDirty(false);
+    getMemes().then((me) => {me.sort((first, second) => second.id-first.id); setMemes(me)}); //put memes from the most recent to the least
+  }, [loggedIn, dirty]);
 
 
   //load images and fonts only at mount time
@@ -66,11 +67,11 @@ function App() {
       <LoginModal show={showLoginModal} setLoggedIn={setLoggedIn} setUserInfo={setUserInfo} setShowLoginModal={setShowLoginModal} onHide={() => setShowLoginModal(false)}/>
       <Container fluid>
         <Switch>
-          <Route path="/view/:id" render={({match}) => <MemeDetails loggedIn={loggedIn} userInfo={userInfo} img={images.find(i => i.id === (memes.find(m => m.id === parseInt(match.params.id)).imageid))} meme={memes.find(m => m.id === parseInt(match.params.id))} fonts={fonts}/>}/>
+          <Route path="/view/:id" render={({match}) => <MemeDetails setDirty={setDirty} loggedIn={loggedIn} userInfo={userInfo} img={images.find(i => i.id === (memes.find(m => m.id === parseInt(match.params.id)).imageid))} meme={memes.find(m => m.id === parseInt(match.params.id))} fonts={fonts}/>}/>
           <Route path="/imgchooser" render={() => loggedIn ? <ImageChooser imgs={images}/> : <Alert variant="danger" className="m-3">You are not logged in!</Alert>}/>
-          <Route path="/editor/:id" render={({match}) => loggedIn ? <MemeEditor img={images.find(i => i.id === parseInt(match.params.id))} fonts={fonts} meme="0"/> : <Alert variant="danger" className="m-3">You are not logged in!</Alert>}/>
-          <Route path="/copy/:id" render={({match}) => loggedIn ? <MemeEditor img={images.find(i => i.id === (memes.find(m => m.id === parseInt(match.params.id)).imageid))} fonts={fonts} meme={memes.find(m => m.id === parseInt(match.params.id))}/> : <Alert variant="danger" className="m-3">You are not logged in!</Alert>}/>
-          <Route path="/" exact render={() => <MemeChooser memes={memes} loggedIn={loggedIn} userInfo={userInfo}/> }/>
+          <Route path="/editor/:id" render={({match}) => loggedIn ? <MemeEditor setDirty={setDirty} userInfo={userInfo} img={images.find(i => i.id === parseInt(match.params.id))} fonts={fonts} meme="0"/> : <Alert variant="danger" className="m-3">You are not logged in!</Alert>}/>
+          <Route path="/copy/:id" render={({match}) => loggedIn ? <MemeEditor setDirty={setDirty} userInfo={userInfo} img={images.find(i => i.id === (memes.find(m => m.id === parseInt(match.params.id)).imageid))} fonts={fonts} meme={memes.find(m => m.id === parseInt(match.params.id))}/> : <Alert variant="danger" className="m-3">You are not logged in!</Alert>}/>
+          <Route path="/" exact render={() => <MemeChooser setDirty={setDirty} memes={memes} loggedIn={loggedIn} userInfo={userInfo}/> }/>
           <Route render={() => <Alert variant="danger" className="m-3">Error 404: NOT FOUND!</Alert> }/>
         </Switch>
       </Container>

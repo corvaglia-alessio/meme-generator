@@ -95,5 +95,52 @@ async function getFonts() {
   }
 }
 
-const API = {login, logout, getUserInfo, getAllMemes, getPublicMemes, getImages, getFonts};
+function addMeme(meme) {
+  return new Promise((resolve, reject) => {
+    fetch("/api/memes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: meme.title,
+        imageid: meme.imageid,
+        pub: meme.pub,
+        userid: meme.userid,
+        copy: meme.copy,
+        color: meme.color,
+        fontid: meme.fontid,
+        size: meme.size,
+        upleft: meme.upleft,
+        upcenter: meme.upcenter,
+        upright: meme.upright,
+        centerleft: meme.centerleft,
+        centercenter: meme.centercenter,
+        centerright: meme.centerright,
+        downleft: meme.downleft,
+        downcenter: meme.downcenter,
+        downright: meme.downright
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          resolve(null);
+        } else {
+          response
+            .json()
+            .then((message) => {
+              reject(message);
+            }) // error message in the response body
+            .catch(() => {
+              reject({ error: "Cannot parse server response." });
+            });
+        }
+      })
+      .catch(() => {
+        reject({ error: "Cannot communicate with the server." });
+      }); // connection errors
+  });
+}
+
+const API = {login, logout, getUserInfo, getAllMemes, getPublicMemes, getImages, getFonts, addMeme};
 export default API;
