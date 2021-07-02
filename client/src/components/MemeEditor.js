@@ -7,8 +7,10 @@ function MemeEditor(props) {
     const [title, setTitle] = useState(props.meme==="0" ? "" : props.meme.title);
     const [color, setColor] = useState(props.meme==="0" ? "#000000" : props.meme.color);
     const [font, setFont] = useState(props.meme==="0" ? props.fonts[0].font : props.meme.font);
+    const [size, setSize] = useState(props.meme==="0" ? 30 : props.meme.size)
     const [pub, setPub] = useState(props.meme==="0" ? false : props.meme.pub);
     const [err, setErr] = useState(false);
+    const [msg, setMsg] = useState("");
 
     let cnt = 0;
     let input = ['', '', ''];
@@ -32,11 +34,26 @@ function MemeEditor(props) {
 
         event.preventDefault();
         setErr(false);
+        setMsg("");
 
         let valid = true;
-        if (title === '' || ((text1 === '') && (text2 === '') && (text3===''))) {
-        valid = false;
-        setErr(true);
+
+        if (title === '') {
+            valid = false;
+            setMsg("Title cannot be empty!");
+            setErr(true);
+        }
+
+        if(((text1 === '') && (text2 === '') && (text3===''))){
+            valid = false;
+            setMsg("At least one text!");
+            setErr(true);
+        }
+
+        if(size==="" || size<0){
+            valid=false;
+            setMsg("Size should be a positive integer!");
+            setErr(true);
         }
 
         if(valid){
@@ -61,7 +78,7 @@ function MemeEditor(props) {
     return (
             <Row>
                 <Col className="">
-                    <MemeViewer img={props.img} text1={text1} text2={text2} text3={text3} font={font} color={color} />
+                    <MemeViewer img={props.img} text1={text1} text2={text2} text3={text3} font={font} color={color} size={size}/>
                 </Col>
                 <Col className="mt-5">
                     <Form onSubmit={sub}>
@@ -100,6 +117,7 @@ function MemeEditor(props) {
                             <FormControl className="w-75" value={font} onChange={(ev)=>setFont(ev.target.value)} placeholder="Font" variant="success" aria-label="Font" as="select">
                                 {props.fonts.map(f => <option key={f.id} value={f.font}>{f.font}</option>)}
                             </FormControl>
+                            <FormControl placeholder="Size" type="number" aria-label="Size" value={size} onChange={(ev)=>setSize(ev.target.value)}/>
                         </InputGroup>
                         <InputGroup className="mb-5">
                             { props.meme!=="0" && props.meme.pub===0 ?
@@ -116,7 +134,7 @@ function MemeEditor(props) {
                             </Button>
                         </InputGroup>
                         <Alert variant="danger" show={err}>
-                            At least a title and one text!
+                            {msg}
                         </Alert>
                     </Form>
                 </Col>

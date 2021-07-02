@@ -48,7 +48,7 @@ function MemeDetails(props) {
     <Container fluid>
       <Row>
         <Col>
-          <MemeViewer img={props.img} text1={texts[0]} text2={texts[1]} text3={texts[2]} color={props.meme.color} font={props.meme.font}/>
+          <MemeViewer img={props.img} text1={texts[0]} text2={texts[1]} text3={texts[2]} color={props.meme.color} font={props.meme.font} size={props.meme.size}/>
         </Col>
         <Col className="mt-5">
           <div className="mycard">
