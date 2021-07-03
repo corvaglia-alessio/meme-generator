@@ -12,8 +12,10 @@ function Navigation(props){
     }
     return( 
         <Navbar bg="primary" variant="dark" sticky="top">
-            <Image src={img}></Image>
-            <Navbar.Brand className="ml-2">MemeGenerator</Navbar.Brand>
+            <Link to="/">
+                <Image src={img}></Image>
+                <Navbar.Brand className="ml-2">MemeGenerator</Navbar.Brand>
+            </Link>
             <Nav className="ml-auto">
                { props.loggedIn ? 
                     <>

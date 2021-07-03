@@ -2,7 +2,6 @@ import {FormControl, InputGroup, Form, Alert, Button, Row, Col} from 'react-boot
 import {MemeViewer} from './MemeViewer.js'
 import {CheckCircle} from 'react-bootstrap-icons';
 import { useState } from 'react';
-import {Link} from 'react-router-dom';
 import API from '../API';
 
 function MemeEditor(props) {
@@ -124,12 +123,10 @@ function MemeEditor(props) {
                             Public meme
                         </InputGroup>
                         <InputGroup className="mb-5">
-                            <Link to="/">
-                                <Button variant="success" onClick={() => send()}>
-                                    <CheckCircle color="white" className="mr-2" size= "30"/>
-                                    Save
-                                </Button>
-                            </Link>
+                            <Button variant="success" onClick={() => send()}>
+                                <CheckCircle color="white" className="mr-2" size= "30"/>
+                                Save
+                            </Button>
                         </InputGroup>
                         <Alert variant="danger" show={err}>
                             {msg}
