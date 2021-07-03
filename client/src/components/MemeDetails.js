@@ -10,10 +10,8 @@ function MemeDetails(props) {
         <Col>
           <MemeViewer img={props.img} text1={props.meme.text1} text2={props.meme.text2} text3={props.meme.text3} color={props.meme.color} font={props.meme.font} size={props.meme.size}/>
         </Col>
-        <Col className="mt-5">
-          <div className="mycard">
-            <MemeCard view="false" setDirty={props.setDirty} meme={props.meme} userInfo={props.userInfo} loggedIn={props.loggedIn}/>
-          </div>
+        <Col className="mt-5 Details">
+          <MemeCard className="CardDetails" view="false" setDirty={props.setDirty} meme={props.meme} userInfo={props.userInfo} loggedIn={props.loggedIn}/>      
         </Col>
       </Row>
     </Container>

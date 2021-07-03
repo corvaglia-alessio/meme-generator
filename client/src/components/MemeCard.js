@@ -11,7 +11,7 @@ function MemeCard(props) {
   }
 
   return (
-    <Card border="primary" className="text-center m-4 card">
+    <Card border="primary" className={"text-center m-4 card "+props.className}>
         <Card.Body>
             <Card.Title>{props.meme.title}</Card.Title>
             <Card.Text>By: {props.meme.name}</Card.Text>

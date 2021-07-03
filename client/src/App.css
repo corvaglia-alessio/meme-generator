@@ -17,10 +17,6 @@
   max-width: 30% ;
 }
 
-.card {
-  width: max-content;
-}
-
 .chooser{
   justify-content: space-evenly;
 }
@@ -52,16 +48,22 @@
   height: 206px;
 }
 
-.mycard{
-  position: relative;
-  top: 30%;
-}
-
 .Meme {
     min-width: 1054px;
     min-height: 620px;
     background-repeat: no-repeat;
-    
+}
+
+.text-cut{
+  overflow: hidden;
+}
+
+.Details{
+  display: flex;
+}
+
+.CardDetails{
+  flex: auto;
 }
 
 .App-header {
@@ -77,23 +79,6 @@
 
 .App-link {
   color: #61dafb;
-}
-
-.text-cut{
-  overflow: hidden;
-}
-.Details{
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.Editor{
-  position: relative;
-  top: 12%;
-  text-align: center;
 }
 
 @keyframes App-logo-spin {
