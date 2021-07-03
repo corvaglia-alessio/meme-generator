@@ -4,7 +4,7 @@ const {database} = require("./database.js");
 
 exports.listAllMemes = () => {
     return new Promise((resolve, reject) => {
-        const sql = "SELECT m.id, m.title, m.imageid, m.pub, m.userid, u.name, m.copy, m.color, f.font, m.size, m.upleft, m.upcenter, m.upright, m.centerleft, m.centercenter, m.centerright, m.downleft, m.downcenter, m.downright FROM memes m, users u, fonts f WHERE m.userid = u.id AND m.fontid = f.id";
+        const sql = "SELECT m.id, m.title, m.imageid, m.pub, m.userid, u.name, m.copy, m.color, f.font, m.size, m.text1, m.text2, m.text3 FROM memes m, users u, fonts f WHERE m.userid = u.id AND m.fontid = f.id";
         database.all(sql, [], (e, rows) => {
             if(e){
                 reject(e);
@@ -21,15 +21,9 @@ exports.listAllMemes = () => {
                 color: m.color,
                 font: m.font,
                 size: m.size,
-                upleft: m.upleft,
-                upcenter: m.upcenter,
-                upright: m.upright,
-                centerleft: m.centerleft,
-                centercenter: m.centercenter,
-                centerright: m.centerright,
-                downleft: m.downleft,
-                downcenter: m.downcenter,
-                downright: m.downright
+                text1: m.text1,
+                text2: m.text2,
+                text3: m.text3
             }));
             resolve(memes);
         });
@@ -38,7 +32,7 @@ exports.listAllMemes = () => {
 
 exports.listPublicMemes = () => {
     return new Promise((resolve, reject) => {
-        const sql = "SELECT m.id, m.title, m.imageid, m.pub, m.userid, u.name, m.copy, m.color, f.font, m.size, m.upleft, m.upcenter, m.upright, m.centerleft, m.centercenter, m.centerright, m.downleft, m.downcenter, m.downright FROM memes m, users u, fonts f WHERE m.userid = u.id AND m.fontid = f.id AND m.pub = 1";
+        const sql = "SELECT m.id, m.title, m.imageid, m.pub, m.userid, u.name, m.copy, m.color, f.font, m.size, m.text1, m.text2, m.text3 FROM memes m, users u, fonts f WHERE m.userid = u.id AND m.fontid = f.id AND m.pub = 1";
         database.all(sql, [], (e, rows) => {
             if(e){
                 reject(e);
@@ -55,15 +49,9 @@ exports.listPublicMemes = () => {
                 color: m.color,
                 font: m.font,
                 size: m.size,
-                upleft: m.upleft,
-                upcenter: m.upcenter,
-                upright: m.upright,
-                centerleft: m.centerleft,
-                centercenter: m.centercenter,
-                centerright: m.centerright,
-                downleft: m.downleft,
-                downcenter: m.downcenter,
-                downright: m.downright
+                text1: m.text1,
+                text2: m.text2,
+                text3: m.text3
             }));
             resolve(memes);
         });
@@ -157,7 +145,7 @@ exports.getImagePath = (id) => {
 exports.addMeme = (meme) => {
   return new Promise((resolve, reject) => {
     const sql =
-      "INSERT INTO memes (title, imageid, pub, userid, copy, color, fontid, size, upleft, upcenter, upright, centerleft, centercenter, centerright, downleft, downcenter, downright) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO memes (title, imageid, pub, userid, copy, color, fontid, size, text1, text2, text3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     database.run(
       sql,
       [
@@ -169,15 +157,9 @@ exports.addMeme = (meme) => {
         meme.color,
         meme.fontid,
         meme.size,
-        meme.upleft,
-        meme.upcenter,
-        meme.upright,
-        meme.centerleft,
-        meme.centercenter,
-        meme.centerright,
-        meme.downleft,
-        meme.downcenter,
-        meme.downright
+        meme.text1,
+        meme.text2,
+        meme.text3
       ],
       function (e) {
         if (e) {

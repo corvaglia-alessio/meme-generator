@@ -159,6 +159,7 @@ app.post('/api/memes', loggedIn, [
   check('copy').isInt({min: 0, max: 1}),
   check('fontid').isInt(),
   check('size').isInt(),
+  check('text1').notEmpty(),
   check('color').notEmpty().isString().isLength({min: 7, max: 7}),
   ], 
 

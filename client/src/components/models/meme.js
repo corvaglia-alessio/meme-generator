@@ -1,5 +1,5 @@
 class Meme {
-    constructor(id, title, imageid, pub, userid, name, copy, color, font, size, upleft, upcenter, upright, centerleft, centercenter, centerright, downleft, downcenter, downright){
+    constructor(id, title, imageid, pub, userid, name, copy, color, font, size, text1, text2, text3){
         this.id=id;
         this.title=title;
         this.imageid=imageid;
@@ -10,19 +10,13 @@ class Meme {
         this.color=color;
         this.font=font;
         this.size=size;
-        this.upleft=upleft;
-        this.upcenter=upcenter;
-        this.upright=upright;
-        this.centerleft=centerleft;
-        this.centercenter=centercenter;
-        this.centerright=centerright;
-        this.downleft=downleft;
-        this.downcenter=downcenter;
-        this.downright=downright;
+        this.text1=text1;
+        this.text2=text2;
+        this.text3=text3;
     }
 
     static from(json) {
-       return new Meme(json.id, json.title, json.imageid, json.pub, json.userid, json.name, json.copy, json.color, json.font, json.size, json.upleft, json.upcenter, json.upright, json.centerleft, json.centercenter, json.centerright, json.downleft, json.downcenter, json.downright);
+       return new Meme(json.id, json.title, json.imageid, json.pub, json.userid, json.name, json.copy, json.color, json.font, json.size, json.text1, json.text2, json.text3);
     }
 }
 

@@ -111,15 +111,9 @@ function addMeme(meme) {
         color: meme.color,
         fontid: meme.fontid,
         size: meme.size,
-        upleft: meme.upleft,
-        upcenter: meme.upcenter,
-        upright: meme.upright,
-        centerleft: meme.centerleft,
-        centercenter: meme.centercenter,
-        centerright: meme.centerright,
-        downleft: meme.downleft,
-        downcenter: meme.downcenter,
-        downright: meme.downright
+        text1: meme.text1,
+        text2: meme.text2,
+        text3: meme.text3
       }),
     })
       .then((response) => {

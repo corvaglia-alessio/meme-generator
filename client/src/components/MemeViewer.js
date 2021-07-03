@@ -1,9 +1,10 @@
 import {Container, Row, Col} from 'react-bootstrap/'
 
 function MemeViewer(props){
+
+    //map from 3 to 9
     let texts = [];
     let assigned = 0;
-
     if(props.img.upleft){
         if(assigned===0) texts[0]=props.text1;
         else if(assigned===1) texts[0]=props.text2;
