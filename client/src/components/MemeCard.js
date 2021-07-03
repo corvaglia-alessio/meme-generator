@@ -23,7 +23,7 @@ function MemeCard(props) {
             <Link to={"/view/"+props.meme.id}>
               <Button variant="success" className="mr-2 ">
                 <AspectRatio color="white" className="mr-2" size= "18"/>
-                View Meme
+                View
               </Button>
             </Link>
             :
@@ -33,26 +33,26 @@ function MemeCard(props) {
             <Link to={"/copy/"+props.meme.id}>
               <Button variant="primary" className="mr-2 ">
                 <Subtract color="white" className="mr-2" size= "18"/>
-                  Make a copy
+                  Copy
               </Button>
             </Link> 
               :
               <Button variant="primary" className="mr-2 "disabled>
                 <Subtract color="white" className="mr-2" size= "18"/>
-                  Make a copy
+                 Copy
               </Button>
             }
             {(props.loggedIn && (props.userInfo.id === props.meme.userid)) ?
               <Link to="/">
                 <Button variant="danger" onClick={() => del()}>
                   <Trash color="white" className="mr-2" size= "18"/>
-                  Delete this meme
+                  Delete
                 </Button>
               </Link>
               :
               <Button variant="danger" disabled>
                 <Trash color="white" className="mr-2" size= "18"/>
-                Delete this meme
+                Delete
               </Button>
             }
         </Card.Body>
