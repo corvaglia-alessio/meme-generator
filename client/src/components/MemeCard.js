@@ -1,8 +1,15 @@
 import {Lock, Unlock, Subtract, Trash, AspectRatio} from 'react-bootstrap-icons';
 import {Card, Button} from 'react-bootstrap/'
 import {Link} from 'react-router-dom';
+import API from '../API';
 
 function MemeCard(props) {
+
+  const del = async () => {
+    await API.deleteMeme(props.meme.id);
+    props.setDirty(true);
+  }
+
   return (
     <Card border="primary" className="text-center m-4 card">
         <Card.Body>
@@ -36,10 +43,12 @@ function MemeCard(props) {
               </Button>
             }
             {(props.loggedIn && (props.userInfo.id === props.meme.userid)) ?
-              <Button variant="danger">
-                <Trash color="white" className="mr-2" size= "18"/>
-                Delete this meme
-              </Button>
+              <Link to="/">
+                <Button variant="danger" onClick={() => del()}>
+                  <Trash color="white" className="mr-2" size= "18"/>
+                  Delete this meme
+                </Button>
+              </Link>
               :
               <Button variant="danger" disabled>
                 <Trash color="white" className="mr-2" size= "18"/>

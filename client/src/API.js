@@ -142,5 +142,22 @@ function addMeme(meme) {
   });
 }
 
-const API = {login, logout, getUserInfo, getAllMemes, getPublicMemes, getImages, getFonts, addMeme};
+function deleteMeme(memeid) {
+  return new Promise((resolve, reject) => {
+    fetch('/api/memes/' + memeid, {
+      method: 'DELETE',
+    }).then((response) => {
+      if (response.ok) {
+        resolve(null);
+      } 
+      else {
+        response.json()
+          .then((message) => { reject(message); })
+          .catch(() => { reject({ error: "Cannot parse server response." }) });
+        }
+    }).catch(() => { reject({ error: "Cannot communicate with the server." }) });
+  });
+}
+
+const API = {login, logout, getUserInfo, getAllMemes, getPublicMemes, getImages, getFonts, addMeme, deleteMeme};
 export default API;

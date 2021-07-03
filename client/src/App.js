@@ -6,7 +6,7 @@ import { MemeChooser } from './components/MemeChooser.js'
 import {MemeDetails} from './components/MemeDetails'
 import {Notify} from './components/Notify'
 import {useState, useEffect} from 'react'
-import {Container, Alert} from 'react-bootstrap/'
+import {Container} from 'react-bootstrap/'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import API from './API';

@@ -52,7 +52,7 @@ function MemeDetails(props) {
         </Col>
         <Col className="mt-5">
           <div className="mycard">
-            <MemeCard view="false" meme={props.meme} userInfo={props.userInfo} loggedIn={props.loggedIn}/>
+            <MemeCard view="false" setDirty={props.setDirty} meme={props.meme} userInfo={props.userInfo} loggedIn={props.loggedIn}/>
           </div>
         </Col>
       </Row>

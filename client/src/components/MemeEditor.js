@@ -46,7 +46,6 @@ function MemeEditor(props) {
 
     const send = async () => {
 
-        //event.preventDefault();
         setErr(false);
         setMsg("");
 

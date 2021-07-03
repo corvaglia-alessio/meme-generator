@@ -190,3 +190,17 @@ exports.addMeme = (meme) => {
     );
   });
 };
+
+exports.deleteMeme = (memeid, userid) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'DELETE FROM memes WHERE id = ? AND userid = ?';
+    database.run(sql, [memeid, userid], (e) => {
+      if (e) {
+        reject(e);
+        return;
+      } 
+      else
+        resolve(null);
+    });
+  });
+}

@@ -176,6 +176,16 @@ app.post('/api/memes', loggedIn, [
     }
 });
 
+//DELETE A MEME
+app.delete('/api/memes/:id', loggedIn, async (req, res) => {
+  try {
+    await dao.deleteMeme(req.params.id, req.user.id);
+    res.status(204).end();
+  } catch(err) {
+    res.status(503).json({ error: `Db error`});
+  }
+});
+
 // activate the server
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
