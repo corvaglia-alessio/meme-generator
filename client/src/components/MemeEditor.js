@@ -2,6 +2,7 @@ import {FormControl, InputGroup, Form, Alert, Button, Row, Col} from 'react-boot
 import {MemeViewer} from './MemeViewer.js'
 import {CheckCircle} from 'react-bootstrap-icons';
 import { useState } from 'react';
+import {Redirect} from 'react-router-dom';
 import API from '../API';
 
 function MemeEditor(props) {
@@ -15,6 +16,7 @@ function MemeEditor(props) {
     const [text1, setText1] = useState(props.meme==="0" ? "" : props.meme.text1);
     const [text2, setText2] = useState(props.meme==="0" ? "" : props.meme.text2);
     const [text3, setText3] = useState(props.meme==="0" ? "" : props.meme.text3);
+    const [submitted, setSubmitted] = useState(false);
 
     //count how many text area the image define in order to enable the exact number of text inputs
     let i = 0;
@@ -66,11 +68,16 @@ function MemeEditor(props) {
             m.text2 = text2;
             m.text3 = text3;
             await API.addMeme(m);
+            setSubmitted(true);
             props.setDirty(true);
         }
     }
 
     return (
+        <>
+        { submitted ?
+            <Redirect to="/"/>
+            :
             <Row>
                 <Col className="">
                     <MemeViewer img={props.img} text1={text1} text2={text2} text3={text3} font={font} color={color} size={size}/>
@@ -134,6 +141,8 @@ function MemeEditor(props) {
                     </Form>
                 </Col>
             </Row>
+        }
+        </>
     );
 }
 
