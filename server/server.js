@@ -40,7 +40,7 @@ const port = 3001;
 app.use(morgan("dev"));
 app.use(express.json());
 
-//middleware for protected queries
+//middlewares
 const loggedIn = (req, res, next) => {
   if(req.isAuthenticated())
     return next();
