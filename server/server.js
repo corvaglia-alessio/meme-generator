@@ -47,6 +47,18 @@ const loggedIn = (req, res, next) => {
   return res.status(401).json({error: "Not authenticated!"});
 };
 
+const checkSize = (req, res, next) => {
+  if(req.body.size > 0)
+    return next();
+  return res.status(422).json({error: "Size param is wrong"});
+}
+
+const checkTexts = (req, res, next) => {
+  if(req.body.text1 || req.body.text2 || req.body.text3)
+    return next();
+  return res.status(422).json({error: "At least one text is required"});
+}
+
 app.use(session({
   secret: "281557Exam2MemeGenerator",
   resave: false,
@@ -154,13 +166,12 @@ app.get("/api/fonts", async (req, res) => {
 
 //INSERT A NEW MEME
 app.post('/api/memes', loggedIn, [
-  check('title').notEmpty().isString(),
+  check('title').notEmpty(),
   check('userid').isInt(),
   check('copy').isInt({min: 0, max: 1}),
   check('fontid').isInt(),
-  check('size').isInt(),
   check('color').notEmpty().isString().isLength({min: 7, max: 7}),
-  ], 
+  ], checkSize, checkTexts, 
 
   async (req, res) => {
     const e = validationResult(req);
