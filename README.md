@@ -13,7 +13,7 @@
 ## API Server
 All request and response bodies are exchanged in JSON.
 
-* HTTP method: `POST`  URL: `/api/sessions`
+## HTTP method: `POST`  URL: `/api/sessions`
 * Description: Perform the user login
 * Request body: Credential of the user that is trying to login     
   `username, password`
@@ -22,14 +22,14 @@ All request and response bodies are exchanged in JSON.
   `id, username, name`
 * Error responses:  `500 Internal Server Error` (generic error), `401 Unauthorized User` (user is not logged in)
 
-* HTTP method: `DELETE`  URL: `/api/sessions/current`
+## HTTP method: `DELETE`  URL: `/api/sessions/current`
 * Description: Perform the user logout
 * Request body: //     
 * Response: `200 OK` (success)
 * Response body: //
 * Error responses:  `500 Internal Server Error` (generic error), `401 Unauthorized User` (user is not logged in)
 
-* HTTP method: `GET`  URL: `/api/sessions/current`
+## HTTP method: `GET`  URL: `/api/sessions/current`
 * Description: Check if the user is logged in
 * Request body: //     
 * Response: `200 OK` (success)
@@ -37,7 +37,7 @@ All request and response bodies are exchanged in JSON.
   `id, username, name`
 * Error responses:  `500 Internal Server Error` (generic error), `401 Unauthorized User` (user is not logged in)
 
-* HTTP method: `GET`  URL: `/api/memes/all`
+## HTTP method: `GET`  URL: `/api/memes/all`
 * Description: Allows the retrieve information about all memes 
 * Request body: //    
 * Response: `200 OK` (success)
@@ -45,7 +45,7 @@ All request and response bodies are exchanged in JSON.
   `id, title, imageid, pub, userid, name, copy, color, font, size, text1, text2, text2`
 * Error responses:  `500 Internal Server Error` (generic error), `401 Unauthorized User` (user is not logged in)
 
-* HTTP method: `GET`  URL: `/api/memes/public`
+## HTTP method: `GET`  URL: `/api/memes/public`
 * Description: Allows the retrieve information about public memes
 * Request body: //    
 * Response: `200 OK` (success)
@@ -53,14 +53,14 @@ All request and response bodies are exchanged in JSON.
   `id, title, imageid, pub, userid, name, copy, color, font, size, text1, text2, text2`
 * Error responses:  `500 Internal Server Error` (generic error)
 
-* HTTP method: `GET`  URL: `/api/images/file/:id`
+## HTTP method: `GET`  URL: `/api/images/file/:id`
 * Description: Allows the retrieve an image from the server
 * Request body: //    
 * Response: `200 OK` (success)
 * Response body: An image file
 * Error responses:  `500 Internal Server Error` (generic error)
 
-* HTTP method: `GET`  URL: `/api/images/info`
+## HTTP method: `GET`  URL: `/api/images/info`
 * Description: Allows the retrieve information about all images
 * Request body: //    
 * Response: `200 OK` (success)
@@ -68,7 +68,7 @@ All request and response bodies are exchanged in JSON.
   `id, path, upleft, upcenter, upright, centerleft, centercenter, centerright, downleft, downcenter, downright `
 * Error responses:  `500 Internal Server Error` (generic error)
 
-* HTTP method: `GET`  URL: `/api/fonts`
+## HTTP method: `GET`  URL: `/api/fonts`
 * Description: Allows the retrieve information about fonts
 * Request body: //    
 * Response: `200 OK` (success)
@@ -76,7 +76,7 @@ All request and response bodies are exchanged in JSON.
   `id, font`
 * Error responses:  `500 Internal Server Error` (generic error)
 
-* HTTP method: `POST`  URL: `/api/memes`
+## HTTP method: `POST`  URL: `/api/memes`
 * Description: Allows to insert a new meme
 * Request body: A meme, with the following properties 
   `title, imageid, pub, userid, copy, color, fontid, size, text1, text2, text3`  
@@ -85,7 +85,7 @@ All request and response bodies are exchanged in JSON.
   `id, font`
 * Error responses:  `503 Service unavailable` (database error), `422 Unprocessable entity` (errors in the request body content), `401 Unauthorized User` (user is not logged in)
 
-* HTTP method: `DELETE`  URL: `/api/memes/:id`
+## HTTP method: `DELETE`  URL: `/api/memes/:id`
 * Description: Allows to delete a meme of the logged in user
 * Request body: //
 * Response: `204 Deleted` (success)
