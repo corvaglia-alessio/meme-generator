@@ -49,10 +49,10 @@ function LoginModal(props) {
         <Form onSubmit={submit}>
           <Modal.Body>
             <InputGroup className="mb-3"> 
-              <FormControl placeholder="Email" aria-label="Email" type="email" value={username} onChange={(ev)=>setUsername(ev.target.value)} aria-describedby="basic-addon1"/>
+              <FormControl placeholder="Email" aria-label="Email" type="email" value={username} onChange={(ev)=>setUsername(ev.target.value)}/>
             </InputGroup>
             <InputGroup className="mb-3">
-              <FormControl placeholder="Password" aria-label="Password" type="password" value={password} onChange={(ev)=>setPassword(ev.target.value)} aria-describedby="basic-addon1"/>
+              <FormControl placeholder="Password" aria-label="Password" type="password" value={password} onChange={(ev)=>setPassword(ev.target.value)}/>
             </InputGroup>
             <Alert variant="danger" show={wrongInput}>
               {error}

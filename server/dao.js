@@ -58,27 +58,6 @@ exports.listPublicMemes = () => {
     });
 };
 
-exports.getAllImagesPath = () => {
-    return new Promise((resolve, reject) => {
-        const sql = 'SELECT path FROM images';
-        database.all(sql, [], (e, rows) =>{
-            if(e){
-                reject(e);
-                return;
-            }
-            if(rows === undefined){
-                resolve({error: "no images found"});
-            }
-            else{
-                const images  = rows.map((i) => ({
-                    path: i.path,
-                }));
-                resolve(images);
-            }
-        });
-    });
-};
-
 exports.getImagesInfo = () => {
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM images";

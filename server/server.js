@@ -9,9 +9,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session");
 const { check, validationResult } = require("express-validator");
 
-//PASSPORT SECTION FOR LOGIN AND LOGOUT
+//passport init
 passport.use(
-  new LocalStrategy(function (username, password, done){
+  new LocalStrategy(
+    function (username, password, done){
     userDao.getUser(username, password).then((user) => {
       if(!user)
         return done(null, false, {msg: "Incorrect username and/or password"});
@@ -20,6 +21,7 @@ passport.use(
   })
 );
 
+//serialize id only, then use the id to deserilize when needed
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -33,20 +35,21 @@ passport.deserializeUser((id, done) => {
     });
 });
 
-// init express
+//express init
 const app = new express();
 const port = 3001;
 
-app.use(morgan("dev"));
-app.use(express.json());
-
 //middlewares
+
+//for login
 const loggedIn = (req, res, next) => {
   if(req.isAuthenticated())
     return next();
   return res.status(401).json({error: "Not authenticated!"});
 };
 
+
+//for add meme validation
 const checkSize = (req, res, next) => {
   if(req.body.size > 0)
     return next();
@@ -59,6 +62,8 @@ const checkTexts = (req, res, next) => {
   return res.status(422).json({error: "At least one text is required"});
 }
 
+
+//app init 
 app.use(session({
   secret: "281557Exam2MemeGenerator",
   resave: false,
@@ -67,8 +72,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
+app.use(morgan("dev"));
+app.use(express.json());
 
 //APIs for users 
 
@@ -164,7 +169,7 @@ app.get("/api/fonts", async (req, res) => {
   }
 });
 
-//INSERT A NEW MEME
+//INSERT A NEW MEME (login protected)
 app.post('/api/memes', loggedIn, [
   check('title').notEmpty(),
   check('userid').isInt(),
@@ -187,7 +192,7 @@ app.post('/api/memes', loggedIn, [
     }
 });
 
-//DELETE A MEME
+//DELETE A MEME (login protected)
 app.delete('/api/memes/:id', loggedIn, async (req, res) => {
   try {
     await dao.deleteMeme(req.params.id, req.user.id);

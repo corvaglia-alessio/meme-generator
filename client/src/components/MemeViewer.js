@@ -2,7 +2,9 @@ import {Container, Row, Col} from 'react-bootstrap/'
 
 function MemeViewer(props){
 
-    //map from 3 to 9
+    //map the 3 texts recevied inside an array of 9 elements
+    //place texts in the correct position based on image of background
+
     let texts = [];
     let assigned = 0;
     if(props.img.upleft){
@@ -71,6 +73,7 @@ function MemeViewer(props){
 
     var bckg = {backgroundImage: `url(${props.img.image})`};
     var style = {fontFamily: props.font, color: props.color, fontSize: `${props.size}px`};
+    
     return(
         <Container style={bckg} className="Meme mt-5">
             <Row className="text-center mytext-up">
