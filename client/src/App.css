@@ -13,6 +13,59 @@
   }
 }
 
+.imageCard{
+  max-width: 30% ;
+}
+
+.chooser{
+  justify-content: space-evenly;
+}
+
+.mytop{
+  position: inherit;
+  top: 20%;
+}
+
+.low{
+  position: inherit;
+  top: 51%;
+}
+
+.middle{
+  position: inherit;
+  top: 32%;
+}
+
+.mytext-up{
+  height: 207px;
+}
+
+.mytext-center{
+  height: 207px;
+}
+
+.mytext-down{
+  height: 206px;
+}
+
+.Meme {
+    min-width: 1054px;
+    min-height: 620px;
+    background-repeat: no-repeat;
+}
+
+.text-cut{
+  overflow: hidden;
+}
+
+.Details{
+  display: flex;
+}
+
+.CardDetails{
+  flex: auto;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
