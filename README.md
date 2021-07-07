@@ -110,7 +110,7 @@ All request and response bodies are exchanged in JSON.
 - `MemeChooser` (in `MemeChooser.js`): it creates a list of MemeCard components in a grid view to show all available memes (or public only memes if user is not logged in).
 - `MemeDetails` (in `MemeDetails.js`): it is used to visualize a meme. It uses a two column view, one column for visualizing the meme with the MemeViewer component and one column for showing its details using a MemeCard component.
 - `MemeEditor` (in `MemeEditor.js`): it is used to edit a meme and visualize the results in real time. It uses a two column view, one column for visualizing the meme with the MemeViewer component and one column contains the form to compile in order to create a new meme, either from scratch or by starting from an existing meme (a copy operation).
-- `MemeViewer` (in `MemeViewer.js`): it is used to visualize a meme. It uses a background image and a 3x3 grid to visualize overlapped textes in the right positions defined by the base image.
+- `MemeViewer` (in `MemeViewer.js`): it is used to visualize a meme. It uses a background image and a 3x3 grid to visualize overlapped texts in the right positions defined by the base image.
 - `Navigation` (in `Navigation.js`): it is used for the creation of the navbar on top of the application. It contains the app logo, login/logout buttons, home button and when a user is logged in, the button for the creation of a new meme.
 - `Notify` (in `Notify.js`): it is used to visualize alerts like "operation performed successfully", "user not logged in" or "non existing page"
 
