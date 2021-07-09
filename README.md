@@ -15,8 +15,7 @@ All request and response bodies are exchanged in JSON.
 
 ## HTTP method: `POST`  URL: `/api/sessions`
 * Description: Perform the user login
-* Request body: Credential of the user that is trying to login     
-  `username, password`
+* Request body: Credential of the user that is trying to login `username, password`
 * Response: `200 OK` (success)
 * Response body: Info about the logged in user
   `id, username, name`
@@ -120,6 +119,11 @@ All request and response bodies are exchanged in JSON.
 
 ## Users Credentials
 
-- NAME: Alessio USERNAME: test1@polito.it, PASSWORD: test1 (He has created memes: "One does not simply..", "Computer engineer's sad life", "SDP.. but in red" (this last one is a copy of John's meme))
-- NAME: John USERNAME: test2@polito.it, PASSWORD: test2 (He has created memes: "WA1 Exam", "SDP", "One does not simply (2) (this last one is a copy of Alessio's meme)")
-- NAME: Peter USERNAME: test3@polito.it, PASSWORD: test3 (He has created memes: "20 Euros", "Memes everywhere", "Computer engineer's sad life" (this last one is a copy of Alessio's meme))
+- NAME: Alessio USERNAME: test1@polito.it, PASSWORD: test1 
+- (He has created memes: "One does not simply..", "Computer engineer's sad life", "SDP.. but in red" (this last one is a copy of John's meme))
+
+- NAME: John USERNAME: test2@polito.it, PASSWORD: test2 
+- (He has created memes: "WA1 Exam", "SDP", "One does not simply (2) (this last one is a copy of Alessio's meme)")
+
+- NAME: Peter USERNAME: test3@polito.it, PASSWORD: test3 
+- (He has created memes: "20 Euros", "Memes everywhere", "Computer engineer's sad life" (this last one is a copy of Alessio's meme))
