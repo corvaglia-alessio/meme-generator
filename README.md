@@ -80,8 +80,7 @@ All request and response bodies are exchanged in JSON.
 * Request body: A meme, with the following properties 
   `title, imageid, pub, userid, copy, color, fontid, size, text1, text2, text3`  
 * Response: `201 Created` (success)
-* Response body: A list of fonts, each with the following properties
-  `id, font`
+* Response body: //
 * Error responses:  `503 Service unavailable` (database error), `422 Unprocessable entity` (errors in the request body content), `401 Unauthorized User` (user is not logged in)
 
 ## HTTP method: `DELETE`  URL: `/api/memes/:id`
